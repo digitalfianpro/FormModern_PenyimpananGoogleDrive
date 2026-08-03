@@ -354,14 +354,17 @@
         // Database lokal yang disinkronkan secara real-time dari Firebase
         let submissionsData = [];
 
-        // Kategori Data
+        // Kategori Data dengan Folder ID Google Drive
         const daftarKategori = [
-            { id: 'kat1', nama: 'Data Nominatif Kampung', driveLink: 'https://drive.google.com/drive/folders/1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs?usp=drive_link' },
-            { id: 'kat2', nama: 'Data Perangkat Bamuskam', driveLink: 'https://drive.google.com/drive/folders/1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm?usp=drive_link' },
-            { id: 'kat3', nama: 'Data Perangkat Kampung', driveLink: 'https://drive.google.com/drive/folders/1GcveHyna6MJePWNWhVd52D2q-wNLZyWR?usp=drive_link' },
-            { id: 'kat4', nama: 'Pelaporan Dana Desa', driveLink: 'https://drive.google.com/drive/folders/1b8LZVf3MRhPRf2kAHosP4ZYorpdFWOn2?usp=drive_link' },
-            { id: 'kat5', nama: 'RKPK / APBK', driveLink: 'https://drive.google.com/drive/folders/1yFE7gf1dFyOeP-G9XymrlfZuNywZYxf4?usp=drive_link' }
+            { id: 'kat1', nama: 'Data Nominatif Kampung', driveId: '1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs', driveLink: 'https://drive.google.com/drive/folders/1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs?usp=drive_link' },
+            { id: 'kat2', nama: 'Data Perangkat Bamuskam', driveId: '1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm', driveLink: 'https://drive.google.com/drive/folders/1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm?usp=drive_link' },
+            { id: 'kat3', nama: 'Data Perangkat Kampung', driveId: '1GcveHyna6MJePWNWhVd52D2q-wNLZyWR', driveLink: 'https://drive.google.com/drive/folders/1GcveHyna6MJePWNWhVd52D2q-wNLZyWR?usp=drive_link' },
+            { id: 'kat4', nama: 'Pelaporan Dana Desa', driveId: '1b8LZVf3MRhPRf2kAHosP4ZYorpdFWOn2', driveLink: 'https://drive.google.com/drive/folders/1b8LZVf3MRhPRf2kAHosP4ZYorpdFWOn2?usp=drive_link' },
+            { id: 'kat5', nama: 'RKPK / APBK', driveId: '1yFE7gf1dFyOeP-G9XymrlfZuNywZYxf4', driveLink: 'https://drive.google.com/drive/folders/1yFE7gf1dFyOeP-G9XymrlfZuNywZYxf4?usp=drive_link' }
         ];
+
+        // URL Google Apps Script Web App untuk otomatisasi upload file ke Google Drive
+        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxioPuAdwhsAY-wm7_DzEEvULOgfGW1PSiku4yyI3VgmI8oJh5ifMnZam7Zm5Izuv09/exec"; 
 
         // Menyimpan file yang diupload per kategori
         let uploadedFiles = {}; 
@@ -382,27 +385,58 @@
                 
                 setupRealtimeListener();
             } catch (err) {
-                console.error("Gagal melakukan autentikasi Firebase:", err);
+                console.error("Gagal melakukan autentikasi:", err);
             }
         }
 
+        // Listener Real-time Firestore untuk Rekap Data Admin
         function setupRealtimeListener() {
             if (!currentUser) return;
             const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
-            
             onSnapshot(submissionsCol, (snapshot) => {
                 submissionsData = [];
-                snapshot.forEach((docSnap) => {
-                    submissionsData.push({ id: docSnap.id, ...docSnap.data() });
+                snapshot.forEach((doc) => {
+                    submissionsData.push({ id: doc.id, ...doc.data() });
                 });
-                
-                // Urutkan berdasarkan waktu pembuatan terbaru
                 submissionsData.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                
-                // Update tampilan tabel jika dashboard admin terbuka
-                renderTable();
+                if (typeof renderTable === 'function') {
+                    renderTable();
+                }
             }, (error) => {
-                console.error("Gagal mendengarkan perubahan data Firestore:", error);
+                console.error("Gagal mendengarkan data real-time:", error);
+            });
+        }
+
+        // Helper membaca file ke Base64
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Function menghapus file kategori
+        function removeKategoriFile(id) {
+            delete uploadedFiles[id];
+            const input = document.getElementById(`input_${id}`);
+            const status = document.getElementById(`status_${id}`);
+            const btnUpload = document.getElementById(`btn_upload_${id}`);
+            const btnRemove = document.getElementById(`btn_remove_${id}`);
+            const box = document.getElementById(`box_${id}`);
+
+            if (input) input.value = '';
+            if (status) status.innerHTML = 'Belum ada file terpilih';
+            if (btnUpload) btnUpload.classList.remove('hidden');
+            if (btnRemove) btnRemove.classList.add('hidden');
+            if (box) box.classList.remove('border-green-300', 'bg-green-50/30');
+        }
+
+        // Reset semua pilihan file setelah submit
+        function resetAllKategori() {
+            daftarKategori.forEach(kat => {
+                removeKategoriFile(kat.id);
             });
         }
 
@@ -525,7 +559,11 @@
                     return;
                 }
 
+                const katObj = daftarKategori.find(k => k.id === id);
+
                 uploadedFiles[id] = {
+                    fileObj: file,
+                    driveId: katObj ? katObj.driveId : '',
                     kategori: namaKategori,
                     fileName: file.name,
                     size: formatBytes(file.size)
@@ -537,29 +575,7 @@
                 box.classList.add('border-green-300', 'bg-green-50/30');
             }
         }
-
-        function removeKategoriFile(id) {
-            const input = document.getElementById(`input_${id}`);
-            const status = document.getElementById(`status_${id}`);
-            const btnUpload = document.getElementById(`btn_upload_${id}`);
-            const btnRemove = document.getElementById(`btn_remove_${id}`);
-            const box = document.getElementById(`box_${id}`);
-            
-            if (input) input.value = '';
-            delete uploadedFiles[id];
-            
-            status.textContent = 'Belum ada file terpilih';
-            btnUpload.classList.remove('hidden');
-            btnRemove.classList.add('hidden');
-            box.classList.remove('border-green-300', 'bg-green-50/30');
-        }
-
-        function resetAllKategori() {
-            uploadedFiles = {};
-            renderKategoriUI(); 
-        }
-
-        // Handle Form Submit (Menyimpan Data ke Firestore)
+        // Handle Form Submit (Menyimpan Data ke Google Drive & Firestore)
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -584,10 +600,42 @@
                 const dateObj = new Date();
                 const timeString = dateObj.toLocaleDateString('id-ID') + ' ' + dateObj.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
                 
-                const listFileDiunggah = Object.values(uploadedFiles).map(item => ({
-                    kategori: item.kategori,
-                    fileName: item.fileName
-                }));
+                const listFileDiunggah = [];
+
+                // Proses Upload Setiap File ke Google Drive via Apps Script (jika URL dikonfigurasi)
+                for (const key of Object.keys(uploadedFiles)) {
+                    const item = uploadedFiles[key];
+                    let fileDriveUrl = '';
+
+                    if (GOOGLE_APPS_SCRIPT_URL) {
+                        try {
+                            const base64Data = await readFileAsBase64(item.fileObj);
+                            const payload = {
+                                folderId: item.driveId,
+                                fileName: item.fileName,
+                                mimeType: item.fileObj.type,
+                                base64: base64Data
+                            };
+
+                            const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                                method: 'POST',
+                                body: JSON.stringify(payload)
+                            });
+                            const result = await res.json();
+                            if (result.status === 'success') {
+                                fileDriveUrl = result.fileUrl;
+                            }
+                        } catch (uploadErr) {
+                            console.error("Gagal unggah berkas ke Drive:", uploadErr);
+                        }
+                    }
+
+                    listFileDiunggah.push({
+                        kategori: item.kategori,
+                        fileName: item.fileName,
+                        fileUrl: fileDriveUrl
+                    });
+                }
 
                 const newRecord = {
                     nama: document.getElementById('namaLengkap').value,
@@ -602,13 +650,13 @@
                 const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
                 await addDoc(submissionsCol, newRecord);
 
-                showModal('success', 'Data Berhasil Terkirim!', 'Terima kasih, data diri dan seluruh berkas Anda telah berhasil tersimpan ke database cloud.');
+                showModal('success', 'Data Berhasil Terkirim!', 'Terima kasih, data diri dan seluruh berkas Anda telah berhasil tersimpan ke Google Drive & Cloud Database.');
                 
                 form.reset();
                 resetAllKategori();
             } catch (err) {
-                console.error("Gagal mengirim data ke Firestore:", err);
-                showModal('error', 'Gagal Mengirim Data', 'Terjadi kesalahan saat menyimpan data ke cloud. Silakan coba lagi.');
+                console.error("Gagal mengirim data:", err);
+                showModal('error', 'Gagal Mengirim Data', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
@@ -690,12 +738,17 @@
                     let filesHTML = '<ul class="space-y-1.5">';
                     if (item.files && Array.isArray(item.files)) {
                         item.files.forEach(f => {
+                            const linkDrive = f.fileUrl 
+                                ? `<a href="${f.fileUrl}" target="_blank" class="text-xs text-brand-600 font-semibold hover:underline flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka File di Drive</a>`
+                                : '';
+
                             filesHTML += `
                                 <li class="text-xs bg-slate-50 p-2 rounded border border-slate-100 flex items-start shadow-sm">
                                     <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2"></i>
                                     <div>
                                         <span class="font-bold text-slate-700 block">${f.kategori}</span>
                                         <span class="text-slate-500 truncate inline-block max-w-[150px]" title="${f.fileName}">${f.fileName}</span>
+                                        ${linkDrive}
                                     </div>
                                 </li>
                             `;
