@@ -2,19 +2,18 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FormModern - Pengumpulan Data Berkas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FormModern - Portal Pengumpulan Data & Berkas Resmi Distrik Sidey</title>
     
-    <!-- Mengimpor font Inter untuk tampilan yang profesional dan modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Mengimpor font Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Mengimpor Tailwind CSS untuk styling -->
+    <!-- Mengimpor Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Mengimpor FontAwesome untuk icon -->
+    <!-- Mengimpor FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Konfigurasi kustom Tailwind dan CSS tambahan -->
     <script>
         tailwind.config = {
             theme: {
@@ -28,6 +27,7 @@
                             100: '#e0f2fe',
                             500: '#0ea5e9',
                             600: '#0284c7',
+                            700: '#0369a1',
                             900: '#0c4a6e',
                         }
                     }
@@ -38,117 +38,205 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Latar belakang gradasi mewah */
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        /* Animasi untuk memunculkan form dengan halus */
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-slide-up {
-            animation: slideUp 0.6s ease-out forwards;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Styling khusus untuk area drag & drop file */
-        .drop-zone {
-            border: 2px dashed #cbd5e1;
-            transition: all 0.3s ease;
-        }
-        .drop-zone.dragover {
-            border-color: #0ea5e9;
-            background-color: #f0f9ff;
-        }
-        
-        /* Kustom scrollbar untuk estetika */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+            background: #f1f5f9; 
         }
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1; 
-            border-radius: 4px;
+            border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8; 
         }
         
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 18px rgba(16, 185, 129, 0.9), 0 0 32px rgba(16, 185, 129, 0.6);
+            }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes borderGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes textShimmerFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-3px) scale(1.02); }
+        }
+
+        .animated-sidey-badge {
+            background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #0c4a6e 100%);
+            animation: gentleFloat 4s ease-in-out infinite;
+            position: relative;
+        }
+        .animated-sidey-badge::before {
+            content: '';
+            position: absolute;
+            inset: -1.5px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #f59e0b, #10b981, #3b82f6, #fbbf24, #f59e0b);
+            background-size: 300% 300%;
+            animation: borderGradient 4s ease infinite;
+            z-index: -1;
+            opacity: 0.85;
+        }
+        .animated-sidey-text {
+            background: linear-gradient(90deg, #fbbf24 0%, #fef08a 25%, #67e8f9 50%, #34d399 75%, #fbbf24 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmerFlow 3s linear infinite;
+        }
+
         @media print {
-            body { background: white; min-height: auto; }
-            .no-print, .animate-slide-up, #adminBtn { display: none !important; }
+            body { background: white !important; min-height: auto; }
+            .no-print, .animate-slide-up, #adminBtn, #topDriveBar { display: none !important; }
             #adminDashboard { position: static; display: block !important; background: white; z-index: 1000; overflow: visible; }
             .print-area { box-shadow: none !important; border: none !important; }
             th, td { border-bottom: 1px solid #e2e8f0; }
         }
         body.preview-active #adminDashboard { background: white; }
-        body.preview-active .no-print { display: none !important; }
+        body.preview-active .hide-in-preview { display: none !important; }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
+<body class="flex flex-col items-center justify-start sm:justify-center p-3 sm:p-6 lg:p-8 relative min-h-screen">
 
-    <button id="adminBtn" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg" title="Akses Admin (Rekap Data)">
-        <i class="fa-solid fa-lock text-sm"></i>
-    </button>
+    <div id="topDriveBar" class="w-full max-w-lg sm:max-w-xl flex items-center justify-between mb-3 z-20">
+        <!-- Badge Status Form -->
+        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-xs font-semibold shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <i class="fa-solid fa-cloud-arrow-up text-brand-500"></i> Form File Online
+        </div>
 
-    <div class="w-full max-w-xl bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden animate-slide-up relative z-10">
+        <!-- Tombol Menyala Google Drive & Admin -->
+        <div class="flex items-center gap-2">
+            <a href="https://drive.google.com/drive/folders/1oVvE8bqbzBJcaEyRHpKi_AiTs3cHgw4Y?usp=drive_link" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-green-600 text-white font-bold text-xs shadow-md hover:from-emerald-400 hover:to-green-500 active:scale-95 transition-all animate-pulse-glow border border-emerald-300/50 group"
+               title="Buka Google Drive Utama">
+                <i class="fa-brands fa-google-drive text-sm text-yellow-300 group-hover:rotate-12 transition-transform"></i>
+                <span class="hidden xs:inline">Kelola Drive</span>
+                <span class="xs:hidden">Drive</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
+            </a>
+
+            <button id="adminBtn" class="w-9 h-9 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white/90 hover:text-white hover:bg-white/20 active:scale-95 transition-all shadow-md" title="Akses Admin (Rekap Data)">
+                <i class="fa-solid fa-lock text-xs sm:text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="w-full max-w-lg sm:max-w-xl bg-white rounded-2xl sm:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.35)] overflow-hidden animate-slide-up relative z-10 my-auto">
         
-        <!-- Aksen garis gradasi di bagian atas kartu -->
-        <div class="h-2 w-full bg-gradient-to-r from-cyan-400 to-blue-600"></div>
+        <!-- Aksen garis gradasi -->
+        <div class="h-1.5 sm:h-2 w-full bg-gradient-to-r from-cyan-400 via-brand-500 to-blue-600"></div>
         
-        <div class="p-8 sm:p-10">
-            <!-- Header Form -->
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-50 text-brand-600 mb-4 shadow-sm border border-brand-100">
-                    <i class="fa-solid fa-file-shield text-2xl"></i>
+        <div class="p-4 sm:p-7 lg:p-8 relative">
+
+            <!-- Header Form Mewah & Modern -->
+            <div class="text-center mb-6 sm:mb-7 relative">
+                <!-- Emblem Logo Gold/Emerald Luxe Glow -->
+                <div class="relative inline-flex items-center justify-center mb-3 group cursor-default">
+                    <div class="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-amber-400 via-emerald-500 to-brand-600 opacity-40 blur-md group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white flex items-center justify-center shadow-2xl border border-amber-400/30">
+                        <i class="fa-solid fa-shield-halved text-2xl sm:text-3xl bg-gradient-to-tr from-amber-300 via-yellow-200 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)]"></i>
+                    </div>
                 </div>
-                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">FormModern</h1>
-                <p class="text-sm text-gray-500 mt-2">Portal Pengumpulan Data & Berkas Resmi</p>
+
+                <!-- Judul Utama -->
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+                    Form<span class="bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent">Modern</span>
+                </h1>
+
+                <!-- Subtitle Sub-Header Mewah & Modern -->
+                <div class="mt-2.5 flex flex-col items-center justify-center gap-1.5">
+                    <!-- Badge Distrik Sidey Bergerak & Mewah (Tanpa Mahkota) -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full animated-sidey-badge shadow-lg shadow-amber-500/10 cursor-default my-1">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+                        </span>
+                        <span class="text-xs sm:text-sm font-black tracking-[0.2em] uppercase animated-sidey-text drop-shadow-sm">
+                            DISTRIK SIDEY
+                        </span>
+                    </div>
+
+                    <!-- Teks Subtitle dengan Tampilan Mewah & Modern -->
+                    <p class="text-xs sm:text-sm font-semibold tracking-wide text-slate-600 max-w-md mx-auto leading-relaxed pt-0.5">
+                        <span class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-800 bg-clip-text text-transparent font-extrabold border-b border-brand-200 pb-0.5">
+                            Portal Pengumpulan Data & Berkas Resmi
+                        </span>
+                    </p>
+                </div>
             </div>
 
-            <form id="modernForm" class="space-y-6">
+            <form id="modernForm" class="space-y-4 sm:space-y-5">
                 
                 <!-- Input Nama Lengkap -->
                 <div>
-                    <label for="namaLengkap" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <label for="namaLengkap" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-regular fa-user text-gray-400"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-user text-slate-400 text-sm"></i>
                         </div>
                         <input type="text" id="namaLengkap" name="namaLengkap" required
-                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl text-gray-900 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-colors text-sm"
+                            class="block w-full pl-10 pr-3.5 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium"
                             placeholder="Masukkan nama lengkap Anda">
                     </div>
                 </div>
 
                 <!-- Input Nama Berkas -->
                 <div>
-                    <label for="namaBerkas" class="block text-sm font-semibold text-gray-700 mb-2">Nama Berkas <span class="text-red-500">*</span></label>
+                    <label for="namaBerkas" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">Nama Berkas / Usulan <span class="text-red-500">*</span></label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-regular fa-folder-open text-gray-400"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-folder-open text-slate-400 text-sm"></i>
                         </div>
                         <input type="text" id="namaBerkas" name="namaBerkas" required
-                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl text-gray-900 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-colors text-sm"
-                            placeholder="Contoh: Dokumen Persyaratan 2026">
+                            class="block w-full pl-10 pr-3.5 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium"
+                            placeholder="Contoh: Dokumen Laporan / Persyaratan 2026">
                     </div>
                 </div>
 
-                <!-- Input Nama Kampung (Diubah menjadi Dropdown) -->
+                <!-- Input Nama Kampung -->
                 <div>
-                    <label for="namaKampung" class="block text-sm font-semibold text-gray-700 mb-2">Nama Kampung / Desa <span class="text-red-500">*</span></label>
+                    <label for="namaKampung" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">Nama Kampung / Desa <span class="text-red-500">*</span></label>
                     <div class="relative">
-                        <!-- Icon Kiri -->
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-solid fa-map-location-dot text-gray-400"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-map-location-dot text-slate-400 text-sm"></i>
                         </div>
-                        
-                        <!-- Select Dropdown -->
                         <select id="namaKampung" name="namaKampung" required
-                            class="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl text-gray-900 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-colors text-sm appearance-none cursor-pointer">
+                            class="block w-full pl-10 pr-10 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium appearance-none cursor-pointer">
                             <option value="" disabled selected>-- Pilih Nama Kampung --</option>
                             <option value="Kaironi">Kaironi</option>
                             <option value="Kasi">Kasi</option>
@@ -163,59 +251,53 @@
                             <option value="Wariki">Wariki</option>
                             <option value="Womnowi">Womnowi</option>
                         </select>
-                        
-                        <!-- Icon Kanan (Panah Bawah) kustom agar lebih mewah -->
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+                        <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kategori & Upload Berkas Multi -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Kategori Berkas <span class="text-red-500">*</span></label>
-                    <p class="text-xs text-gray-500 mb-4">Pilih dan unggah berkas sesuai kategorinya. Anda dapat mengunggah di satu atau beberapa kategori (Maks. 20MB per berkas).</p>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-xs sm:text-sm font-bold text-slate-700">Kategori Berkas Lampiran <span class="text-red-500">*</span></label>
+                        <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <i class="fa-solid fa-bolt text-yellow-500 mr-0.5"></i> Upload Cepat
+                        </span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-slate-500 mb-3">Pilih satu atau beberapa kategori file (Foto/PDF/Doc). Sistem akan mengompres foto secara otomatis agar pengiriman super cepat!</p>
                     
-                    <div class="space-y-3" id="kategoriContainer">
-                        <!-- List Kategori akan dimuat oleh JavaScript secara otomatis -->
+                    <div class="space-y-2.5 sm:space-y-3" id="kategoriContainer">
+                        <!-- List Kategori akan dimuat oleh JS secara rapi -->
                     </div>
                 </div>
 
-                <!-- Tombol Submit -->
-                <div class="pt-4">
-                    <button type="submit" id="submitBtn" class="relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-brand-600 to-blue-700 hover:from-brand-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 shadow-lg shadow-brand-500/30 transform transition-all active:scale-[0.98]">
+                <div class="pt-2">
+                    <button type="submit" id="submitBtn" class="relative w-full min-h-[48px] flex justify-center items-center py-3 px-4 border border-transparent text-xs sm:text-sm font-bold rounded-xl text-white bg-gradient-to-r from-brand-600 via-brand-500 to-blue-700 hover:from-brand-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 shadow-lg shadow-brand-500/25 active:scale-[0.98] transition-all">
                         <span id="btnText" class="flex items-center">
-                            <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Kirim & Simpan Data
+                            <i class="fa-solid fa-paper-plane mr-2 text-sm"></i> Kirim & Simpan Data
                         </span>
-                        <span id="btnLoading" class="hidden flex items-center">
-                            <i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Menyinkronkan ke Drive...
+                        <span id="btnLoading" class="hidden items-center justify-center">
+                            <i class="fa-solid fa-circle-notch fa-spin mr-2 text-base"></i>
+                            <span id="btnLoadingText">Mengunggah file...</span>
                         </span>
                     </button>
                 </div>
                 
-                <p class="text-center text-xs text-gray-400 mt-4">
-                    <i class="fa-solid fa-lock mr-1"></i> Data Anda dienkripsi dan dijamin keamanannya.
+                <p class="text-center text-[11px] text-slate-400 pt-1 flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-shield-halved text-emerald-500"></i> Data Anda dienkripsi dan tersimpan dengan aman di Cloud Drive.
                 </p>
             </form>
         </div>
     </div>
 
-    <!-- Modal Global (Untuk Error & Sukses) -->
+    <!-- Modal Global Notifications -->
     <div id="customModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
-        
-        <!-- Modal Content -->
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-6 text-center" id="modalContent">
-            
-            <div id="modalIconContainer" class="mx-auto flex items-center justify-center h-16 w-16 rounded-full mb-4">
-                <!-- Icon disuntikkan via JS -->
-            </div>
-            
-            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2">Judul Modal</h3>
-            <p id="modalMessage" class="text-sm text-gray-600 mb-6">Pesan modal akan muncul di sini.</p>
-            
-            <button type="button" id="closeModalBtn" class="w-full inline-flex justify-center rounded-xl border border-transparent px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6 text-center" id="modalContent">
+            <div id="modalIconContainer" class="mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full mb-3.5"></div>
+            <h3 id="modalTitle" class="text-base sm:text-lg font-bold text-slate-900 mb-1.5">Judul Modal</h3>
+            <p id="modalMessage" class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed">Pesan modal akan muncul di sini.</p>
+            <button type="button" id="closeModalBtn" class="w-full inline-flex justify-center rounded-xl border border-transparent px-4 py-2.5 text-xs sm:text-sm font-bold text-white transition-colors active:scale-95">
                 Tutup
             </button>
         </div>
@@ -223,96 +305,120 @@
 
     <!-- Modal Kata Sandi Admin -->
     <div id="passwordModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-gray-900/70 backdrop-blur-sm transition-opacity opacity-0" id="passwordBackdrop"></div>
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-6" id="passwordContent">
-            <div class="text-center mb-5">
-                <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-slate-100 text-slate-700 mb-4">
-                    <i class="fa-solid fa-user-shield text-2xl"></i>
+        <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity opacity-0" id="passwordBackdrop"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6" id="passwordContent">
+            <div class="text-center mb-4">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-2xl bg-slate-100 text-slate-700 mb-3 border border-slate-200">
+                    <i class="fa-solid fa-user-shield text-xl"></i>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900">Akses Admin</h3>
-                <p class="text-sm text-gray-500 mt-1">Masukkan kata sandi untuk melihat rekap data.</p>
+                <h3 class="text-base sm:text-lg font-bold text-slate-900">Akses Admin</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Masukkan kata sandi untuk melihat rekap data.</p>
             </div>
-            <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-xl mb-5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-center tracking-[0.3em] font-bold text-gray-700" placeholder="••••••••">
-            <div class="flex gap-3">
-                <button type="button" id="cancelPasswordBtn" class="w-1/2 rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors">Batal</button>
-                <button type="button" id="submitPasswordBtn" class="w-1/2 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-900 transition-colors shadow-lg shadow-slate-800/30">Masuk</button>
+            <input type="password" id="adminPassword" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl mb-4 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-center tracking-[0.25em] font-bold text-slate-800 text-sm" placeholder="••••••••">
+            <div class="flex gap-2.5">
+                <button type="button" id="cancelPasswordBtn" class="w-1/2 rounded-xl border border-slate-300 px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Batal</button>
+                <button type="button" id="submitPasswordBtn" class="w-1/2 rounded-xl bg-slate-900 px-3 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-slate-800 active:scale-95 transition-all shadow-md">Masuk</button>
             </div>
         </div>
     </div>
 
-    <!-- Dashboard Admin (Tabel Rekap Data) -->
+    <!-- Modal Konfirmasi Hapus Data -->
+    <div id="deleteConfirmModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity opacity-0" id="deleteConfirmBackdrop"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6 text-center" id="deleteConfirmContent">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 mb-3">
+                <i class="fa-solid fa-trash-can text-xl"></i>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5">Hapus Data Berkas?</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data berkas ini?</p>
+            <div class="flex gap-2.5">
+                <button type="button" id="cancelDeleteBtn" class="w-1/2 rounded-xl border border-slate-300 px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Batal</button>
+                <button type="button" id="confirmDeleteBtn" class="w-1/2 rounded-xl bg-red-600 px-3 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-red-700 active:scale-95 transition-all shadow-md flex items-center justify-center">
+                    <span id="btnDeleteText">Ya, Hapus</span>
+                    <span id="btnDeleteLoading" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-1.5"></i> Proses...</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="adminDashboard" class="fixed inset-0 z-40 hidden bg-slate-50 overflow-y-auto">
-        <div class="min-h-screen p-4 sm:p-6 lg:p-8 pb-24">
+        <div class="min-h-screen p-3 sm:p-6 lg:p-8 pb-24">
             <div class="max-w-7xl mx-auto">
                 <!-- Header Dashboard -->
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 no-print">
-                    <div class="flex items-center gap-4">
-                        <div class="h-12 w-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center border border-brand-100 shadow-sm">
-                            <i class="fa-solid fa-table-list text-xl"></i>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 no-print hide-in-preview">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="h-10 w-10 sm:h-12 sm:w-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center border border-brand-100 shadow-sm shrink-0">
+                            <i class="fa-solid fa-table-list text-lg sm:text-xl"></i>
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Rekap Data Berkas</h2>
-                            <p class="text-slate-500 text-sm mt-0.5">Total <span id="totalData" class="font-bold text-brand-600">0</span> data terkumpul</p>
+                            <h2 class="text-lg sm:text-2xl font-bold text-slate-900 tracking-tight">Rekap Data Berkas</h2>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Total <span id="totalData" class="font-bold text-brand-600">0</span> data terkumpul</p>
                         </div>
                     </div>
-                    <div class="flex flex-wrap gap-2 w-full sm:w-auto mt-2 sm:mt-0">
-                        <button id="backToFormBtn" class="flex-1 sm:flex-none px-4 py-2.5 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-arrow-left mr-2"></i>Kembali</button>
-                        <button id="previewDataBtn" class="flex-1 sm:flex-none px-4 py-2.5 bg-sky-50 text-sky-700 rounded-xl hover:bg-sky-100 border border-sky-100 text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-expand mr-2"></i>Pratinjau</button>
-                        <button id="printDataBtn" class="flex-1 sm:flex-none px-4 py-2.5 bg-brand-600 text-white rounded-xl hover:bg-brand-700 shadow-md shadow-brand-500/20 text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-print mr-2"></i>Cetak</button>
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto pt-1 sm:pt-0">
+                        <button id="backToFormBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-arrow-left mr-1.5"></i>Kembali</button>
+                        <button id="previewDataBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-sky-50 text-sky-700 rounded-xl hover:bg-sky-100 border border-sky-100 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-expand mr-1.5"></i>Pratinjau</button>
+                        <button id="printDataBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-brand-600 text-white rounded-xl hover:bg-brand-700 shadow-sm text-xs sm:text-sm font-bold transition-colors flex items-center justify-center"><i class="fa-solid fa-print mr-1.5"></i>Cetak</button>
                     </div>
                 </div>
 
-                <!-- Tombol keluar pratinjau (Floating di bawah) -->
-                <div id="exitPreviewContainer" class="hidden fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 no-print animate-slide-up">
-                    <button id="exitPreviewBtn" class="px-6 py-3 bg-slate-900 text-white rounded-full shadow-2xl font-semibold flex items-center gap-2 hover:bg-slate-800 transition-transform hover:scale-105 border border-slate-700">
-                        <i class="fa-solid fa-compress"></i> Keluar Pratinjau
+                <!-- Search / Filter Input for Mobile Admin -->
+                <div class="mb-4 no-print hide-in-preview">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
+                        <input type="text" id="adminSearchInput" placeholder="Cari berdasarkan nama, berkas, atau kampung..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
+                    </div>
+                </div>
+
+                <!-- Floating Exit Preview Button -->
+                <div id="exitPreviewContainer" class="hidden fixed top-4 right-4 z-50 no-print animate-slide-up">
+                    <button id="exitPreviewBtn" class="px-4 py-2 bg-slate-900 text-white rounded-xl shadow-2xl font-bold text-xs sm:text-sm flex items-center gap-2 hover:bg-slate-800 transition-all border border-slate-700">
+                        <i class="fa-solid fa-arrow-left"></i> Keluar Pratinjau
                     </button>
                 </div>
 
-                <!-- Tabel Area (Bisa di-print) -->
+                <!-- Tabel Area -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-area" id="printableArea">
-                    <!-- Judul hanya muncul saat di-print -->
-                    <div class="p-6 border-b border-slate-100 hidden print:block">
-                        <h1 class="text-2xl font-bold text-center text-slate-900">Laporan Pengumpulan Berkas FormModern</h1>
-                        <p class="text-center text-slate-500 text-sm mt-1" id="printDate"></p>
+                    <div class="p-4 sm:p-6 border-b border-slate-100 hidden print:block">
+                        <h1 class="text-xl font-bold text-center text-slate-900">Laporan Pengumpulan Berkas FormModern - Distrik Sidey</h1>
+                        <p class="text-center text-slate-500 text-xs sm:text-sm mt-1" id="printDate"></p>
                     </div>
                     
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse min-w-[800px]">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
                             <thead>
                                 <tr class="bg-slate-50 border-b border-slate-200">
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider w-16 text-center">No</th>
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Waktu Input</th>
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Lengkap</th>
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Berkas</th>
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Kampung / Desa</th>
-                                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">File Lampiran</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider w-12 text-center">No</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Waktu Input</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Lengkap</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Berkas</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Kampung / Desa</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">File Lampiran</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider text-center no-print">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody id="dataTableBody" class="divide-y divide-slate-100">
-                                <!-- Data tabel masuk ke sini -->
+                            <tbody id="dataTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm">
+                                <!-- Data tabel diinject via JS -->
                             </tbody>
                         </table>
                     </div>
                     
-                    <!-- Kondisi Kosong -->
-                    <div id="emptyState" class="p-16 text-center hidden">
-                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-50 mb-5 border border-slate-100">
-                            <i class="fa-regular fa-folder-open text-4xl text-slate-300"></i>
+                    <div id="emptyState" class="p-12 text-center hidden">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 mb-3 border border-slate-100">
+                            <i class="fa-regular fa-folder-open text-3xl text-slate-300"></i>
                         </div>
-                        <h4 class="text-slate-900 font-bold text-lg">Belum Ada Data</h4>
-                        <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Data yang dikirim melalui formulir akan otomatis tersusun rapi di tabel ini.</p>
+                        <h4 class="text-slate-800 font-bold text-base">Belum Ada Data</h4>
+                        <p class="text-slate-500 text-xs mt-1 max-w-xs mx-auto">Data yang dikirim melalui formulir akan otomatis tersusun di tabel ini.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDK Imports & App Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
@@ -327,7 +433,6 @@
                 measurementId: "G-2DCR6QHTB5"
             };
 
-        // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -341,6 +446,7 @@
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnLoading = document.getElementById('btnLoading');
+        const btnLoadingText = document.getElementById('btnLoadingText');
         
         // Modal Elements
         const modal = document.getElementById('customModal');
@@ -351,7 +457,6 @@
         const modalMessage = document.getElementById('modalMessage');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
-        // Database lokal yang disinkronkan secara real-time dari Firebase
         let submissionsData = [];
 
         // Kategori Data dengan Folder ID Google Drive
@@ -363,16 +468,13 @@
             { id: 'kat5', nama: 'RKPK / APBK', driveId: '1yFE7gf1dFyOeP-G9XymrlfZuNywZYxf4', driveLink: 'https://drive.google.com/drive/folders/1yFE7gf1dFyOeP-G9XymrlfZuNywZYxf4?usp=drive_link' }
         ];
 
-        // URL Google Apps Script Web App untuk otomatisasi upload file ke Google Drive
+        // URL Web App Google Apps Script
         const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1e_w3gyqE4yxPQ5Hi6tny6YMyuIrXxtlM6IGTvnWwmC6wvmPkM1KNk-UOIJMk2tu6/exec"; 
 
-        // Menyimpan file yang diupload per kategori
         let uploadedFiles = {}; 
+        const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 
-        // Konstanta
-        const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB dalam bytes
-
-        // Autentikasi Pengguna & Sinkronisasi Data Real-time
+        // Auth Init
         async function initAuthAndDataSync() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -382,14 +484,12 @@
                     const userCred = await signInAnonymously(auth);
                     currentUser = userCred.user;
                 }
-                
                 setupRealtimeListener();
             } catch (err) {
-                console.error("Gagal melakukan autentikasi:", err);
+                console.error("Autentikasi gagal:", err);
             }
         }
 
-        // Listener Real-time Firestore untuk Rekap Data Admin
         function setupRealtimeListener() {
             if (!currentUser) return;
             const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
@@ -403,7 +503,61 @@
                     renderTable();
                 }
             }, (error) => {
-                console.error("Gagal mendengarkan data real-time:", error);
+                console.error("Gagal mendengarkan data Firestore:", error);
+            });
+        }
+
+        /**
+         * Mengompresi file gambar (JPEG/PNG/WEBP) secara otomatis di browser pengguna.
+         * Ini memangkas ukuran foto HP (5-10MB) menjadi ~300KB sehingga proses upload 5-10x LEBIH CEPAT!
+         */
+        async function compressImageIfNeeded(file) {
+            if (!file.type.startsWith('image/')) {
+                return file; // Bukan gambar, return file asli (PDF, Excel, Doc, dll.)
+            }
+
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxDim = 1600; // Resolusi maks 1600px (Sangat cukup jernih untuk dokumen/dokumen foto)
+
+                        if (width > maxDim || height > maxDim) {
+                            if (width > height) {
+                                height = Math.round((height * maxDim) / width);
+                                width = maxDim;
+                            } else {
+                                width = Math.round((width * maxDim) / height);
+                                height = maxDim;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        canvas.toBlob((blob) => {
+                            if (!blob) {
+                                resolve(file);
+                                return;
+                            }
+                            const compressedFile = new File([blob], file.name, {
+                                type: 'image/jpeg',
+                                lastModified: Date.now()
+                            });
+                            resolve(compressedFile);
+                        }, 'image/jpeg', 0.82); // Kualitas 82% (keseimbangan sempurna antara kejernihan dan kecepatan)
+                    };
+                    img.onerror = () => resolve(file);
+                };
+                reader.onerror = () => resolve(file);
             });
         }
 
@@ -417,55 +571,28 @@
             });
         }
 
-        // Function menghapus file kategori
-        function removeKategoriFile(id) {
-            delete uploadedFiles[id];
-            const input = document.getElementById(`input_${id}`);
-            const status = document.getElementById(`status_${id}`);
-            const btnUpload = document.getElementById(`btn_upload_${id}`);
-            const btnRemove = document.getElementById(`btn_remove_${id}`);
-            const box = document.getElementById(`box_${id}`);
-
-            if (input) input.value = '';
-            if (status) status.innerHTML = 'Belum ada file terpilih';
-            if (btnUpload) btnUpload.classList.remove('hidden');
-            if (btnRemove) btnRemove.classList.add('hidden');
-            if (box) box.classList.remove('border-green-300', 'bg-green-50/30');
-        }
-
-        // Reset semua pilihan file setelah submit
-        function resetAllKategori() {
-            daftarKategori.forEach(kat => {
-                removeKategoriFile(kat.id);
-            });
-        }
-
-        // Jalankan autentikasi saat aplikasi dimuat
-        initAuthAndDataSync();
-
-        // Fungsi format ukuran file
-        function formatBytes(bytes, decimals = 2) {
-            if (bytes === 0) return '0 Bytes';
+        function formatBytes(bytes, decimals = 1) {
+            if (bytes === 0) return '0 B';
             const k = 1024;
             const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            const sizes = ['B', 'KB', 'MB', 'GB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         }
 
-        // Fungsi untuk mengelola Modal (Pengganti Alert)
+        // Modal Helpers
         function showModal(type, title, message) {
             modalTitle.textContent = title;
             modalMessage.textContent = message;
             
             if (type === 'error') {
-                modalIconContainer.className = 'mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-red-600 mb-4';
-                modalIconContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-3xl"></i>';
-                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-red-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors';
+                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-red-100 text-red-600 mb-3';
+                modalIconContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-2xl sm:text-3xl"></i>';
+                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-red-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-red-700 transition-colors';
             } else if (type === 'success') {
-                modalIconContainer.className = 'mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mb-4';
-                modalIconContainer.innerHTML = '<i class="fa-solid fa-check text-3xl"></i>';
-                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors';
+                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-emerald-100 text-emerald-600 mb-3';
+                modalIconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-2xl sm:text-3xl"></i>';
+                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-emerald-700 transition-colors';
             }
 
             modal.classList.remove('hidden');
@@ -480,55 +607,53 @@
             modalBackdrop.classList.add('opacity-0');
             modalContent.classList.remove('opacity-100', 'scale-100');
             modalContent.classList.add('opacity-0', 'scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            setTimeout(() => modal.classList.add('hidden'), 250);
         }
 
         closeModalBtn.addEventListener('click', hideModal);
 
-        // Fungsi Render List Kategori UI
         function renderKategoriUI() {
             kategoriContainer.innerHTML = '';
             daftarKategori.forEach((kat, index) => {
                 const no = index + 1;
-                
                 let driveInfo = '';
                 if (kat.driveLink) {
                     driveInfo = `
-                        <a href="${kat.driveLink}" target="_blank" class="inline-flex items-center mt-1.5 text-[10px] font-bold bg-green-50 text-green-700 px-2 py-0.5 rounded border border-green-200 hover:bg-green-100 transition-colors" title="Lihat Folder Penyimpanan Drive">
-                            <i class="fa-brands fa-google-drive mr-1 text-sm"></i> Tersimpan ke Drive
+                        <a href="${kat.driveLink}" target="_blank" class="inline-flex items-center text-[10px] font-bold text-emerald-700 hover:underline mt-0.5" title="Folder Drive">
+                            <i class="fa-brands fa-google-drive mr-1"></i> Folder Drive
                         </a>
                     `;
                 }
 
                 const html = `
-                    <div id="box_${kat.id}" class="border border-gray-200 rounded-xl p-4 transition-all hover:border-brand-300 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="flex items-start gap-3 overflow-hidden w-full sm:w-auto">
-                            <div class="mt-0.5 flex-shrink-0 w-7 h-7 rounded-full bg-brand-50 flex items-center justify-center text-xs font-bold text-brand-600 border border-brand-100">${no}</div>
-                            <div class="truncate w-full">
-                                <h4 class="text-sm font-bold text-gray-800">${kat.nama}</h4>
-                                <p class="text-xs text-gray-500 truncate" id="status_${kat.id}">Belum ada file terpilih</p>
-                                ${driveInfo}
+                    <div id="box_${kat.id}" class="border border-slate-200 rounded-xl p-3 sm:p-3.5 transition-all hover:border-brand-300 bg-white shadow-sm flex flex-col gap-2.5">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex items-start gap-2.5 min-w-0">
+                                <div class="mt-0.5 shrink-0 w-6 h-6 rounded-lg bg-brand-50 flex items-center justify-center text-[11px] font-extrabold text-brand-600 border border-brand-100">${no}</div>
+                                <div class="min-w-0">
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">${kat.nama}</h4>
+                                    <p class="text-[11px] text-slate-400 truncate mt-0.5" id="status_${kat.id}">Belum ada file terpilih</p>
+                                    ${driveInfo}
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-center gap-2 flex-shrink-0 ml-10 sm:ml-0 mt-2 sm:mt-0">
-                            <input type="file" id="input_${kat.id}" class="hidden">
                             
-                            <button type="button" id="btn_upload_${kat.id}" class="text-xs font-semibold px-3 py-1.5 bg-white text-brand-600 rounded-lg hover:bg-brand-50 transition-colors border border-brand-200 flex items-center shadow-sm">
-                                <i class="fa-solid fa-upload mr-1.5"></i> Pilih File
-                            </button>
-                            
-                            <button type="button" id="btn_remove_${kat.id}" class="hidden text-xs font-semibold px-2.5 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors border border-red-200 shadow-sm" title="Hapus File">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            <!-- Action Buttons -->
+                            <div class="shrink-0 flex items-center gap-1.5">
+                                <input type="file" id="input_${kat.id}" class="hidden">
+                                
+                                <button type="button" id="btn_upload_${kat.id}" class="text-xs font-bold px-3 py-2 bg-slate-50 text-brand-600 rounded-xl hover:bg-brand-50 hover:text-brand-700 active:scale-95 transition-all border border-brand-200 flex items-center shadow-sm min-h-[38px]">
+                                    <i class="fa-solid fa-cloud-arrow-up mr-1.5 text-xs"></i> Pilih File
+                                </button>
+                                
+                                <button type="button" id="btn_remove_${kat.id}" class="hidden text-xs font-bold px-2.5 py-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 active:scale-95 transition-all border border-red-200 min-h-[38px]" title="Hapus">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
                 kategoriContainer.insertAdjacentHTML('beforeend', html);
 
-                // Tambahkan Listener Tombol Secara Eksplisit
                 document.getElementById(`btn_upload_${kat.id}`).addEventListener('click', () => {
                     document.getElementById(`input_${kat.id}`).click();
                 });
@@ -541,9 +666,27 @@
             });
         }
 
+        function removeKategoriFile(id) {
+            delete uploadedFiles[id];
+            const input = document.getElementById(`input_${id}`);
+            const status = document.getElementById(`status_${id}`);
+            const btnUpload = document.getElementById(`btn_upload_${id}`);
+            const btnRemove = document.getElementById(`btn_remove_${id}`);
+            const box = document.getElementById(`box_${id}`);
+
+            if (input) input.value = '';
+            if (status) status.innerHTML = 'Belum ada file terpilih';
+            if (btnUpload) btnUpload.classList.remove('hidden');
+            if (btnRemove) btnRemove.classList.add('hidden');
+            if (box) box.classList.remove('border-emerald-300', 'bg-emerald-50/20');
+        }
+
+        function resetAllKategori() {
+            daftarKategori.forEach(kat => removeKategoriFile(kat.id));
+        }
+
         renderKategoriUI();
 
-        // Handle File Selection per Kategori
         function handleKategoriFile(id, namaKategori) {
             const input = document.getElementById(`input_${id}`);
             const status = document.getElementById(`status_${id}`);
@@ -554,7 +697,7 @@
             
             if (file) {
                 if (file.size > MAX_FILE_SIZE) {
-                    showModal('error', 'Ukuran File Terlalu Besar', `Maaf, ukuran file untuk kategori ${namaKategori} melebihi batas maksimal 20 MB.`);
+                    showModal('error', 'Ukuran Terlalu Besar', `Ukuran file (${formatBytes(file.size)}) melebihi batas 20 MB.`);
                     input.value = '';
                     return;
                 }
@@ -569,27 +712,28 @@
                     size: formatBytes(file.size)
                 };
 
-                status.innerHTML = `<span class="text-green-600 font-medium"><i class="fa-solid fa-check-circle mr-1"></i> ${file.name}</span> <span class="text-gray-400">(${formatBytes(file.size)})</span>`;
+                status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${file.name}</span> <span class="text-slate-400">(${formatBytes(file.size)})</span>`;
                 btnUpload.classList.add('hidden');
                 btnRemove.classList.remove('hidden');
-                box.classList.add('border-green-300', 'bg-green-50/30');
+                box.classList.add('border-emerald-300', 'bg-emerald-50/20');
             }
         }
-        // Handle Form Submit (Menyimpan Data ke Google Drive & Firestore)
+
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            if (Object.keys(uploadedFiles).length === 0) {
-                showModal('error', 'Berkas Kosong', 'Silakan unggah minimal satu berkas pada kategori yang tersedia sebelum mengirim formulir.');
+            const selectedKeys = Object.keys(uploadedFiles);
+            if (selectedKeys.length === 0) {
+                showModal('error', 'Berkas Belum Dipilih', 'Silakan unggah minimal 1 berkas pada kategori di atas sebelum mengirim.');
                 return;
             }
 
             if (!currentUser) {
-                showModal('error', 'Koneksi Terputus', 'Sedang menghubungkan ke server data. Silakan coba beberapa saat lagi.');
+                showModal('error', 'Koneksi Terputus', 'Sedang menghubungkan ke server. Silakan coba sebentar lagi.');
                 return;
             }
 
-            // Ubah state tombol menjadi loading
+            // Lock UI submit state
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
             btnText.classList.add('hidden');
@@ -599,24 +743,34 @@
             try {
                 const dateObj = new Date();
                 const timeString = dateObj.toLocaleDateString('id-ID') + ' ' + dateObj.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
-                
-                const listFileDiunggah = [];
-
-                // Proses Upload Setiap File ke Google Drive via Apps Script (jika URL dikonfigurasi)
                 const selectedKampung = document.getElementById('namaKampung').value;
 
-                for (const key of Object.keys(uploadedFiles)) {
+                // Step 1: Pre-process & Compress image files concurrently
+                btnLoadingText.textContent = `Mengompres & menyiapkan (${selectedKeys.length} file)...`;
+                
+                const preparedItems = await Promise.all(selectedKeys.map(async (key) => {
                     const item = uploadedFiles[key];
-                    let fileDriveUrl = '';
+                    const processedFile = await compressImageIfNeeded(item.fileObj);
+                    const base64Data = await readFileAsBase64(processedFile);
+                    return {
+                        item: item,
+                        processedFile: processedFile,
+                        base64Data: base64Data
+                    };
+                }));
 
+                // Step 2: Parallel Upload via Promise.all (SUPER FAST)
+                btnLoadingText.textContent = `Mengunggah ${selectedKeys.length} file sekaligus...`;
+
+                const uploadPromises = preparedItems.map(async (prep) => {
+                    let fileDriveUrl = '';
                     if (GOOGLE_APPS_SCRIPT_URL) {
                         try {
-                            const base64Data = await readFileAsBase64(item.fileObj);
                             const payload = {
-                                folderId: item.driveId,
-                                fileName: item.fileName,
-                                mimeType: item.fileObj.type,
-                                base64: base64Data,
+                                folderId: prep.item.driveId,
+                                fileName: prep.processedFile.name,
+                                mimeType: prep.processedFile.type,
+                                base64: prep.base64Data,
                                 kampung: selectedKampung
                             };
 
@@ -633,33 +787,36 @@
                         }
                     }
 
-                    listFileDiunggah.push({
-                        kategori: item.kategori,
-                        fileName: item.fileName,
+                    return {
+                        kategori: prep.item.kategori,
+                        fileName: prep.processedFile.name,
                         fileUrl: fileDriveUrl
-                    });
-                }
+                    };
+                });
 
+                const listFileDiunggah = await Promise.all(uploadPromises);
+
+                // Step 3: Save metadata to Firestore
+                btnLoadingText.textContent = 'Menyimpan data...';
                 const newRecord = {
                     nama: document.getElementById('namaLengkap').value,
                     berkas: document.getElementById('namaBerkas').value,
-                    kampung: document.getElementById('namaKampung').value,
+                    kampung: selectedKampung,
                     files: listFileDiunggah,
                     waktu: timeString,
                     createdAt: Date.now()
                 };
 
-                // Simpan langsung ke Firestore
                 const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
                 await addDoc(submissionsCol, newRecord);
 
-                showModal('success', 'Data Berhasil Terkirim!', 'Terima kasih, data diri dan seluruh berkas Anda telah berhasil tersimpan ke Google Drive & Cloud Database.');
+                showModal('success', 'Data Berhasil Terkirim!', 'Data dan berkas telah berhasil tersimpan dengan cepat ke Google Drive & Cloud Database.');
                 
                 form.reset();
                 resetAllKategori();
             } catch (err) {
                 console.error("Gagal mengirim data:", err);
-                showModal('error', 'Gagal Mengirim Data', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                showModal('error', 'Gagal Mengirim', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
@@ -669,9 +826,6 @@
             }
         });
 
-        // ==========================================
-        // FITUR DASHBOARD ADMIN & REKAP DATA
-        // ==========================================
         const adminBtn = document.getElementById('adminBtn');
         const passwordModal = document.getElementById('passwordModal');
         const passwordBackdrop = document.getElementById('passwordBackdrop');
@@ -679,6 +833,18 @@
         const adminPasswordInput = document.getElementById('adminPassword');
         const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
         const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+
+        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+        const deleteConfirmBackdrop = document.getElementById('deleteConfirmBackdrop');
+        const deleteConfirmContent = document.getElementById('deleteConfirmContent');
+        const deleteConfirmMessage = document.getElementById('deleteConfirmMessage');
+        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const btnDeleteText = document.getElementById('btnDeleteText');
+        const btnDeleteLoading = document.getElementById('btnDeleteLoading');
+
+        let itemToDeleteId = null;
+
         const adminDashboard = document.getElementById('adminDashboard');
         const backToFormBtn = document.getElementById('backToFormBtn');
         const printDataBtn = document.getElementById('printDataBtn');
@@ -688,6 +854,7 @@
         const dataTableBody = document.getElementById('dataTableBody');
         const emptyState = document.getElementById('emptyState');
         const tableElement = document.querySelector('table');
+        const adminSearchInput = document.getElementById('adminSearchInput');
 
         function showPasswordModal() {
             adminPasswordInput.value = '';
@@ -704,7 +871,7 @@
             passwordBackdrop.classList.add('opacity-0');
             passwordContent.classList.remove('opacity-100', 'scale-100');
             passwordContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => passwordModal.classList.add('hidden'), 300);
+            setTimeout(() => passwordModal.classList.add('hidden'), 250);
         }
 
         function verifyPassword() {
@@ -713,9 +880,7 @@
                 openAdminDashboard();
             } else {
                 hidePasswordModal();
-                setTimeout(() => {
-                    showModal('error', 'Akses Ditolak', 'Kata sandi yang Anda masukkan salah.');
-                }, 350); 
+                setTimeout(() => showModal('error', 'Akses Ditolak', 'Kata sandi salah.'), 300);
             }
         }
 
@@ -726,31 +891,46 @@
             if (e.key === 'Enter') verifyPassword();
         });
 
+        // Search Filter Event
+        if (adminSearchInput) {
+            adminSearchInput.addEventListener('input', renderTable);
+        }
+
         function renderTable() {
-            document.getElementById('totalData').textContent = submissionsData.length;
+            const query = (adminSearchInput ? adminSearchInput.value : '').toLowerCase().trim();
+            
+            const filteredData = submissionsData.filter(item => {
+                if (!query) return true;
+                const nama = (item.nama || '').toLowerCase();
+                const berkas = (item.berkas || '').toLowerCase();
+                const kampung = (item.kampung || '').toLowerCase();
+                return nama.includes(query) || berkas.includes(query) || kampung.includes(query);
+            });
+
+            document.getElementById('totalData').textContent = filteredData.length;
             dataTableBody.innerHTML = '';
             
-            if (submissionsData.length === 0) {
+            if (filteredData.length === 0) {
                 emptyState.classList.remove('hidden');
                 tableElement.classList.add('hidden');
             } else {
                 emptyState.classList.add('hidden');
                 tableElement.classList.remove('hidden');
                 
-                submissionsData.forEach((item, index) => {
+                filteredData.forEach((item, index) => {
                     let filesHTML = '<ul class="space-y-1.5">';
                     if (item.files && Array.isArray(item.files)) {
                         item.files.forEach(f => {
                             const linkDrive = f.fileUrl 
-                                ? `<a href="${f.fileUrl}" target="_blank" class="text-xs text-brand-600 font-semibold hover:underline flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka File di Drive</a>`
+                                ? `<a href="${f.fileUrl}" target="_blank" class="text-[11px] text-brand-600 font-bold hover:underline inline-flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka File Drive</a>`
                                 : '';
 
                             filesHTML += `
-                                <li class="text-xs bg-slate-50 p-2 rounded border border-slate-100 flex items-start shadow-sm">
-                                    <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2"></i>
-                                    <div>
-                                        <span class="font-bold text-slate-700 block">${f.kategori}</span>
-                                        <span class="text-slate-500 truncate inline-block max-w-[150px]" title="${f.fileName}">${f.fileName}</span>
+                                <li class="text-xs bg-slate-50 p-2 rounded-lg border border-slate-100 flex items-start shadow-2xs">
+                                    <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2 shrink-0"></i>
+                                    <div class="min-w-0">
+                                        <span class="font-bold text-slate-700 block text-[11px]">${f.kategori}</span>
+                                        <span class="text-slate-500 truncate block text-[11px] max-w-[160px]" title="${f.fileName}">${f.fileName}</span>
                                         ${linkDrive}
                                     </div>
                                 </li>
@@ -760,21 +940,74 @@
                     filesHTML += '</ul>';
 
                     const tr = document.createElement('tr');
-                    tr.className = 'hover:bg-slate-50/80 transition-colors group';
+                    tr.className = 'hover:bg-slate-50/80 transition-colors';
                     tr.innerHTML = `
-                        <td class="px-6 py-4 text-sm text-slate-500 text-center font-medium align-top">${index + 1}</td>
-                        <td class="px-6 py-4 text-sm text-slate-500 whitespace-nowrap align-top"><i class="fa-regular fa-clock mr-1.5 opacity-40"></i> ${item.waktu || '-'}</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-slate-900 align-top">${item.nama || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-slate-600 align-top">${item.berkas || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-slate-600 align-top"><span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">${item.kampung || '-'}</span></td>
-                        <td class="px-6 py-4 text-sm text-slate-600 align-top min-w-[250px]">
-                            ${filesHTML}
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-500 text-center font-bold align-top">${index + 1}</td>
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-500 whitespace-nowrap align-top text-xs"><i class="fa-regular fa-clock mr-1 opacity-50"></i> ${item.waktu || '-'}</td>
+                        <td class="px-4 sm:px-6 py-3.5 font-bold text-slate-900 align-top">${item.nama || '-'}</td>
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top">${item.berkas || '-'}</td>
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top"><span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">${item.kampung || '-'}</span></td>
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top min-w-[220px]">${filesHTML}</td>
+                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top text-center no-print">
+                            <button type="button" onclick="askDeleteRecord('${item.id}', '${(item.nama || '').replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 rounded-lg text-xs font-bold transition-all active:scale-95 inline-flex items-center gap-1 shadow-2xs" title="Hapus Data">
+                                <i class="fa-solid fa-trash-can"></i> Hapus
+                            </button>
                         </td>
                     `;
                     dataTableBody.appendChild(tr);
                 });
             }
         }
+
+        window.askDeleteRecord = function(id, nama) {
+            itemToDeleteId = id;
+            deleteConfirmMessage.textContent = nama 
+                ? `Apakah Anda yakin ingin menghapus berkas milik "${nama}"?` 
+                : 'Apakah Anda yakin ingin menghapus data ini?';
+            
+            deleteConfirmModal.classList.remove('hidden');
+            setTimeout(() => {
+                deleteConfirmBackdrop.classList.remove('opacity-0');
+                deleteConfirmContent.classList.remove('opacity-0', 'scale-95');
+                deleteConfirmContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        };
+
+        function hideDeleteModal() {
+            deleteConfirmBackdrop.classList.add('opacity-0');
+            deleteConfirmContent.classList.remove('opacity-100', 'scale-100');
+            deleteConfirmContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                deleteConfirmModal.classList.add('hidden');
+                itemToDeleteId = null;
+            }, 250);
+        }
+
+        cancelDeleteBtn.addEventListener('click', hideDeleteModal);
+
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (!itemToDeleteId || !currentUser) return;
+
+            confirmDeleteBtn.disabled = true;
+            btnDeleteText.classList.add('hidden');
+            btnDeleteLoading.classList.remove('hidden');
+
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', itemToDeleteId);
+                await deleteDoc(docRef);
+
+                hideDeleteModal();
+                setTimeout(() => showModal('success', 'Berhasil Dihapus', 'Rekap data berkas telah dihapus.'), 300);
+            } catch (err) {
+                console.error("Gagal menghapus:", err);
+                hideDeleteModal();
+                setTimeout(() => showModal('error', 'Gagal Menghapus', 'Terjadi kesalahan saat menghapus data.'), 300);
+            } finally {
+                confirmDeleteBtn.disabled = false;
+                btnDeleteText.classList.remove('hidden');
+                btnDeleteLoading.classList.add('hidden');
+            }
+        });
 
         function openAdminDashboard() {
             renderTable();
@@ -799,7 +1032,7 @@
             exitPreviewContainer.classList.add('flex');
             
             setTimeout(() => {
-                showModal('success', 'Mode Pratinjau', 'Mode pratinjau aktif. Layar telah dibersihkan agar mudah dibaca atau dipresentasikan.');
+                showModal('success', 'Mode Pratinjau', 'Tampilan telah disederhanakan untuk mode presentasi.');
             }, 100);
         });
 
@@ -808,6 +1041,8 @@
             exitPreviewContainer.classList.add('hidden');
             exitPreviewContainer.classList.remove('flex');
         });
+
+        initAuthAndDataSync();
     </script>
 </body>
 </html>
