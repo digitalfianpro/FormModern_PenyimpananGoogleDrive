@@ -308,7 +308,33 @@
         </div>
     </div>
 
-    <script>
+    <!-- Firebase SDK Imports & App Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyD66xgZ_SG5NhuHQqlJig3OHGJam_8sHyQ",
+                authDomain: "formmodern.firebaseapp.com",
+                projectId: "formmodern",
+                storageBucket: "formmodern.firebasestorage.app",
+                messagingSenderId: "55557010319",
+                appId: "1:55557010319:web:1e6017dc8fcf71d77891fa",
+                measurementId: "G-2DCR6QHTB5"
+            };
+
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'formmodern';
+        let currentUser = null;
+
         // DOM Elements
         const form = document.getElementById('modernForm');
         const kategoriContainer = document.getElementById('kategoriContainer');
@@ -325,8 +351,8 @@
         const modalMessage = document.getElementById('modalMessage');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
-        // Database lokal (berada di memori saat sesi berjalan)
-        const submissionsData = [];
+        // Database lokal yang disinkronkan secara real-time dari Firebase
+        let submissionsData = [];
 
         // Kategori Data
         const daftarKategori = [
@@ -343,6 +369,46 @@
         // Konstanta
         const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB dalam bytes
 
+        // Autentikasi Pengguna & Sinkronisasi Data Real-time
+        async function initAuthAndDataSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const userCred = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = userCred.user;
+                } else {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                }
+                
+                setupRealtimeListener();
+            } catch (err) {
+                console.error("Gagal melakukan autentikasi Firebase:", err);
+            }
+        }
+
+        function setupRealtimeListener() {
+            if (!currentUser) return;
+            const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+            
+            onSnapshot(submissionsCol, (snapshot) => {
+                submissionsData = [];
+                snapshot.forEach((docSnap) => {
+                    submissionsData.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                
+                // Urutkan berdasarkan waktu pembuatan terbaru
+                submissionsData.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                
+                // Update tampilan tabel jika dashboard admin terbuka
+                renderTable();
+            }, (error) => {
+                console.error("Gagal mendengarkan perubahan data Firestore:", error);
+            });
+        }
+
+        // Jalankan autentikasi saat aplikasi dimuat
+        initAuthAndDataSync();
+
         // Fungsi format ukuran file
         function formatBytes(bytes, decimals = 2) {
             if (bytes === 0) return '0 Bytes';
@@ -358,7 +424,6 @@
             modalTitle.textContent = title;
             modalMessage.textContent = message;
             
-            // Konfigurasi visual berdasarkan tipe (error/success)
             if (type === 'error') {
                 modalIconContainer.className = 'mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-red-600 mb-4';
                 modalIconContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-3xl"></i>';
@@ -369,9 +434,7 @@
                 closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors';
             }
 
-            // Tampilkan modal
             modal.classList.remove('hidden');
-            // Sedikit delay agar transisi CSS berjalan
             setTimeout(() => {
                 modalBackdrop.classList.remove('opacity-0');
                 modalContent.classList.remove('opacity-0', 'scale-95');
@@ -386,7 +449,7 @@
             
             setTimeout(() => {
                 modal.classList.add('hidden');
-            }, 300); // Sesuaikan dengan durasi transisi CSS
+            }, 300);
         }
 
         closeModalBtn.addEventListener('click', hideModal);
@@ -397,7 +460,6 @@
             daftarKategori.forEach((kat, index) => {
                 const no = index + 1;
                 
-                // Cek apakah ada link Google Drive khusus untuk kategori ini
                 let driveInfo = '';
                 if (kat.driveLink) {
                     driveInfo = `
@@ -418,23 +480,33 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0 ml-10 sm:ml-0 mt-2 sm:mt-0">
-                            <input type="file" id="input_${kat.id}" class="hidden" onchange="handleKategoriFile('${kat.id}', '${kat.nama}')">
+                            <input type="file" id="input_${kat.id}" class="hidden">
                             
-                            <button type="button" id="btn_upload_${kat.id}" onclick="document.getElementById('input_${kat.id}').click()" class="text-xs font-semibold px-3 py-1.5 bg-white text-brand-600 rounded-lg hover:bg-brand-50 transition-colors border border-brand-200 flex items-center shadow-sm">
+                            <button type="button" id="btn_upload_${kat.id}" class="text-xs font-semibold px-3 py-1.5 bg-white text-brand-600 rounded-lg hover:bg-brand-50 transition-colors border border-brand-200 flex items-center shadow-sm">
                                 <i class="fa-solid fa-upload mr-1.5"></i> Pilih File
                             </button>
                             
-                            <button type="button" id="btn_remove_${kat.id}" onclick="removeKategoriFile('${kat.id}')" class="hidden text-xs font-semibold px-2.5 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors border border-red-200 shadow-sm" title="Hapus File">
+                            <button type="button" id="btn_remove_${kat.id}" class="hidden text-xs font-semibold px-2.5 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors border border-red-200 shadow-sm" title="Hapus File">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
                     </div>
                 `;
                 kategoriContainer.insertAdjacentHTML('beforeend', html);
+
+                // Tambahkan Listener Tombol Secara Eksplisit
+                document.getElementById(`btn_upload_${kat.id}`).addEventListener('click', () => {
+                    document.getElementById(`input_${kat.id}`).click();
+                });
+                document.getElementById(`input_${kat.id}`).addEventListener('change', () => {
+                    handleKategoriFile(kat.id, kat.nama);
+                });
+                document.getElementById(`btn_remove_${kat.id}`).addEventListener('click', () => {
+                    removeKategoriFile(kat.id);
+                });
             });
         }
 
-        // Panggil render saat pertama kali dimuat
         renderKategoriUI();
 
         // Handle File Selection per Kategori
@@ -447,22 +519,18 @@
             const file = input.files[0];
             
             if (file) {
-                // Validasi Ukuran (Maks 20 MB)
                 if (file.size > MAX_FILE_SIZE) {
                     showModal('error', 'Ukuran File Terlalu Besar', `Maaf, ukuran file untuk kategori ${namaKategori} melebihi batas maksimal 20 MB.`);
                     input.value = '';
                     return;
                 }
 
-                // Simpan ke object memori
                 uploadedFiles[id] = {
                     kategori: namaKategori,
-                    file: file,
                     fileName: file.name,
                     size: formatBytes(file.size)
                 };
 
-                // Update UI Visual
                 status.innerHTML = `<span class="text-green-600 font-medium"><i class="fa-solid fa-check-circle mr-1"></i> ${file.name}</span> <span class="text-gray-400">(${formatBytes(file.size)})</span>`;
                 btnUpload.classList.add('hidden');
                 btnRemove.classList.remove('hidden');
@@ -470,7 +538,6 @@
             }
         }
 
-        // Menghapus File per Kategori
         function removeKategoriFile(id) {
             const input = document.getElementById(`input_${id}`);
             const status = document.getElementById(`status_${id}`);
@@ -478,7 +545,7 @@
             const btnRemove = document.getElementById(`btn_remove_${id}`);
             const box = document.getElementById(`box_${id}`);
             
-            input.value = '';
+            if (input) input.value = '';
             delete uploadedFiles[id];
             
             status.textContent = 'Belum ada file terpilih';
@@ -487,19 +554,22 @@
             box.classList.remove('border-green-300', 'bg-green-50/30');
         }
 
-        // Fungsi mereset seluruh kategori setelah sukses kirim data
         function resetAllKategori() {
             uploadedFiles = {};
             renderKategoriUI(); 
         }
 
-        // Handle Form Submit
-        form.addEventListener('submit', function(e) {
+        // Handle Form Submit (Menyimpan Data ke Firestore)
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Cek minimal ada 1 file diunggah
             if (Object.keys(uploadedFiles).length === 0) {
                 showModal('error', 'Berkas Kosong', 'Silakan unggah minimal satu berkas pada kategori yang tersedia sebelum mengirim formulir.');
+                return;
+            }
+
+            if (!currentUser) {
+                showModal('error', 'Koneksi Terputus', 'Sedang menghubungkan ke server data. Silakan coba beberapa saat lagi.');
                 return;
             }
 
@@ -510,41 +580,42 @@
             btnLoading.classList.remove('hidden');
             btnLoading.classList.add('flex');
 
-            // Simulasi proses upload ke server (2 detik)
-            setTimeout(() => {
-                // Mengambil waktu saat ini
+            try {
                 const dateObj = new Date();
                 const timeString = dateObj.toLocaleDateString('id-ID') + ' ' + dateObj.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
                 
-                // Kumpulkan daftar file yang diunggah
-                const listFileDiunggah = Object.values(uploadedFiles).map(item => {
-                    return { kategori: item.kategori, fileName: item.fileName };
-                });
+                const listFileDiunggah = Object.values(uploadedFiles).map(item => ({
+                    kategori: item.kategori,
+                    fileName: item.fileName
+                }));
 
-                // Menyimpan data formulir ke array
-                submissionsData.push({
+                const newRecord = {
                     nama: document.getElementById('namaLengkap').value,
                     berkas: document.getElementById('namaBerkas').value,
                     kampung: document.getElementById('namaKampung').value,
                     files: listFileDiunggah,
-                    waktu: timeString
-                });
+                    waktu: timeString,
+                    createdAt: Date.now()
+                };
 
-                // Kembalikan state tombol
+                // Simpan langsung ke Firestore
+                const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+                await addDoc(submissionsCol, newRecord);
+
+                showModal('success', 'Data Berhasil Terkirim!', 'Terima kasih, data diri dan seluruh berkas Anda telah berhasil tersimpan ke database cloud.');
+                
+                form.reset();
+                resetAllKategori();
+            } catch (err) {
+                console.error("Gagal mengirim data ke Firestore:", err);
+                showModal('error', 'Gagal Mengirim Data', 'Terjadi kesalahan saat menyimpan data ke cloud. Silakan coba lagi.');
+            } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
                 btnText.classList.remove('hidden');
                 btnLoading.classList.add('hidden');
                 btnLoading.classList.remove('flex');
-
-                // Tampilkan pesan sukses
-                showModal('success', 'Data Berhasil Terkirim!', 'Terima kasih, data diri dan seluruh berkas Anda telah berhasil kami terima.');
-                
-                // Reset seluruh form
-                form.reset();
-                resetAllKategori();
-                
-            }, 2000);
+            }
         });
 
         // ==========================================
@@ -567,7 +638,6 @@
         const emptyState = document.getElementById('emptyState');
         const tableElement = document.querySelector('table');
 
-        // Fungsi Tampilkan/Sembunyikan Modal Password
         function showPasswordModal() {
             adminPasswordInput.value = '';
             passwordModal.classList.remove('hidden');
@@ -586,7 +656,6 @@
             setTimeout(() => passwordModal.classList.add('hidden'), 300);
         }
 
-        // Verifikasi Kata Sandi
         function verifyPassword() {
             if (adminPasswordInput.value === 'Latsar026') {
                 hidePasswordModal();
@@ -599,7 +668,6 @@
             }
         }
 
-        // Listener Modal Password
         adminBtn.addEventListener('click', showPasswordModal);
         cancelPasswordBtn.addEventListener('click', hidePasswordModal);
         submitPasswordBtn.addEventListener('click', verifyPassword);
@@ -607,7 +675,6 @@
             if (e.key === 'Enter') verifyPassword();
         });
 
-        // Merender Tabel berdasarkan Data Array
         function renderTable() {
             document.getElementById('totalData').textContent = submissionsData.length;
             dataTableBody.innerHTML = '';
@@ -619,31 +686,31 @@
                 emptyState.classList.add('hidden');
                 tableElement.classList.remove('hidden');
                 
-                // Menyuntikkan baris tabel baru
                 submissionsData.forEach((item, index) => {
-                    // Buat list HTML untuk menampilkan banyak file terunggah
                     let filesHTML = '<ul class="space-y-1.5">';
-                    item.files.forEach(f => {
-                        filesHTML += `
-                            <li class="text-xs bg-slate-50 p-2 rounded border border-slate-100 flex items-start shadow-sm">
-                                <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2"></i>
-                                <div>
-                                    <span class="font-bold text-slate-700 block">${f.kategori}</span>
-                                    <span class="text-slate-500 truncate inline-block max-w-[150px]" title="${f.fileName}">${f.fileName}</span>
-                                </div>
-                            </li>
-                        `;
-                    });
+                    if (item.files && Array.isArray(item.files)) {
+                        item.files.forEach(f => {
+                            filesHTML += `
+                                <li class="text-xs bg-slate-50 p-2 rounded border border-slate-100 flex items-start shadow-sm">
+                                    <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2"></i>
+                                    <div>
+                                        <span class="font-bold text-slate-700 block">${f.kategori}</span>
+                                        <span class="text-slate-500 truncate inline-block max-w-[150px]" title="${f.fileName}">${f.fileName}</span>
+                                    </div>
+                                </li>
+                            `;
+                        });
+                    }
                     filesHTML += '</ul>';
 
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-slate-50/80 transition-colors group';
                     tr.innerHTML = `
                         <td class="px-6 py-4 text-sm text-slate-500 text-center font-medium align-top">${index + 1}</td>
-                        <td class="px-6 py-4 text-sm text-slate-500 whitespace-nowrap align-top"><i class="fa-regular fa-clock mr-1.5 opacity-40"></i> ${item.waktu}</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-slate-900 align-top">${item.nama}</td>
-                        <td class="px-6 py-4 text-sm text-slate-600 align-top">${item.berkas}</td>
-                        <td class="px-6 py-4 text-sm text-slate-600 align-top"><span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">${item.kampung}</span></td>
+                        <td class="px-6 py-4 text-sm text-slate-500 whitespace-nowrap align-top"><i class="fa-regular fa-clock mr-1.5 opacity-40"></i> ${item.waktu || '-'}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-slate-900 align-top">${item.nama || '-'}</td>
+                        <td class="px-6 py-4 text-sm text-slate-600 align-top">${item.berkas || '-'}</td>
+                        <td class="px-6 py-4 text-sm text-slate-600 align-top"><span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">${item.kampung || '-'}</span></td>
                         <td class="px-6 py-4 text-sm text-slate-600 align-top min-w-[250px]">
                             ${filesHTML}
                         </td>
@@ -653,7 +720,6 @@
             }
         }
 
-        // Kontrol Visibilitas Dashboard Admin
         function openAdminDashboard() {
             renderTable();
             document.body.style.overflow = 'hidden'; 
@@ -665,32 +731,27 @@
             document.body.style.overflow = '';
         });
 
-        // Fitur Cetak (Print)
         printDataBtn.addEventListener('click', () => {
             const dateStr = new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' });
             document.getElementById('printDate').textContent = 'Dicetak pada: ' + dateStr;
             window.print();
         });
 
-        // Fitur Pratinjau (Preview Bersih)
         previewDataBtn.addEventListener('click', () => {
             document.body.classList.add('preview-active');
             exitPreviewContainer.classList.remove('hidden');
             exitPreviewContainer.classList.add('flex');
             
-            // Tambahkan notifikasi kecil
             setTimeout(() => {
                 showModal('success', 'Mode Pratinjau', 'Mode pratinjau aktif. Layar telah dibersihkan agar mudah dibaca atau dipresentasikan.');
             }, 100);
         });
 
-        // Fitur Keluar Pratinjau
         exitPreviewBtn.addEventListener('click', () => {
             document.body.classList.remove('preview-active');
             exitPreviewContainer.classList.add('hidden');
             exitPreviewContainer.classList.remove('flex');
         });
-
     </script>
 </body>
 </html>
