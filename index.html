@@ -603,6 +603,8 @@
                 const listFileDiunggah = [];
 
                 // Proses Upload Setiap File ke Google Drive via Apps Script (jika URL dikonfigurasi)
+                const selectedKampung = document.getElementById('namaKampung').value;
+
                 for (const key of Object.keys(uploadedFiles)) {
                     const item = uploadedFiles[key];
                     let fileDriveUrl = '';
@@ -614,7 +616,8 @@
                                 folderId: item.driveId,
                                 fileName: item.fileName,
                                 mimeType: item.fileObj.type,
-                                base64: base64Data
+                                base64: base64Data,
+                                kampung: selectedKampung
                             };
 
                             const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
