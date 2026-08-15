@@ -93,6 +93,30 @@
             50% { transform: translateY(-3px) scale(1.02); }
         }
 
+        /* Animasi Efek Mewah untuk Logo */
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+        .animate-floating-logo {
+            animation: floatLogo 4s ease-in-out infinite;
+        }
+        
+        @keyframes spinSlow {
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 10s linear infinite;
+        }
+        
+        @keyframes sweepLight {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            40%, 100% { transform: translateX(150%) skewX(-20deg); }
+        }
+        .animate-sweep-light {
+            animation: sweepLight 5s infinite;
+        }
+
         .animated-sidey-badge {
             background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #0c4a6e 100%);
             animation: gentleFloat 4s ease-in-out infinite;
@@ -166,10 +190,18 @@
             <!-- Header Form Mewah & Modern -->
             <div class="text-center mb-6 sm:mb-7 relative">
                 <!-- Emblem Logo Gold/Emerald Luxe Glow -->
-                <div class="relative inline-flex items-center justify-center mb-3 group cursor-default">
-                    <div class="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-amber-400 via-emerald-500 to-brand-600 opacity-40 blur-md group-hover:opacity-75 transition duration-500"></div>
-                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white flex items-center justify-center shadow-2xl border border-amber-400/30">
-                        <i class="fa-solid fa-shield-halved text-2xl sm:text-3xl bg-gradient-to-tr from-amber-300 via-yellow-200 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)]"></i>
+                <div class="relative inline-flex items-center justify-center mb-6 group cursor-default animate-floating-logo">
+                    <!-- Cahaya aura berputar di belakang logo -->
+                    <div class="absolute -inset-2.5 rounded-[2rem] bg-gradient-to-r from-amber-400 via-emerald-500 to-brand-600 opacity-60 blur-xl animate-spin-slow"></div>
+                    <!-- Cahaya berdenyut statis -->
+                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-500 opacity-50 blur-md animate-pulse"></div>
+                    
+                    <!-- Bingkai Wadah Logo -->
+                    <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-900 flex items-center justify-center shadow-2xl border-2 border-amber-400/80 overflow-hidden z-10 ring-4 ring-slate-900/40">
+                        <!-- Efek kilapan cahaya melintas (sweep light) pada kaca logo -->
+                        <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent z-20 pointer-events-none animate-sweep-light mix-blend-overlay"></div>
+                        
+                        <img src="https://i.ibb.co.com/DP0G84Qm/Chat-GPT-Image-Jul-27-2026-05-10-28-PM.png" alt="Logo Distrik Sidey" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/100x100/0f172a/fbbf24?text=Logo'">
                     </div>
                 </div>
 
@@ -212,19 +244,6 @@
                         <input type="text" id="namaLengkap" name="namaLengkap" required
                             class="block w-full pl-10 pr-3.5 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium"
                             placeholder="Masukkan nama lengkap Anda">
-                    </div>
-                </div>
-
-                <!-- Input Nama Berkas -->
-                <div>
-                    <label for="namaBerkas" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">Nama Berkas / Usulan <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                            <i class="fa-regular fa-folder-open text-slate-400 text-sm"></i>
-                        </div>
-                        <input type="text" id="namaBerkas" name="namaBerkas" required
-                            class="block w-full pl-10 pr-3.5 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium"
-                            placeholder="Contoh: Dokumen Laporan / Persyaratan 2026">
                     </div>
                 </div>
 
@@ -366,7 +385,7 @@
                 <div class="mb-4 no-print hide-in-preview">
                     <div class="relative">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
-                        <input type="text" id="adminSearchInput" placeholder="Cari berdasarkan nama, berkas, atau kampung..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
+                        <input type="text" id="adminSearchInput" placeholder="Cari berdasarkan nama atau kampung..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
                     </div>
                 </div>
 
@@ -391,7 +410,6 @@
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider w-12 text-center">No</th>
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Waktu Input</th>
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Lengkap</th>
-                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Berkas</th>
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Kampung / Desa</th>
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">File Lampiran</th>
                                     <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider text-center no-print">Aksi</th>
@@ -651,7 +669,7 @@
                                 </div>
                                 
                                 <div class="shrink-0 flex items-center gap-1.5">
-                                    <input type="file" id="input_${kat.id}" class="hidden">
+                                    <input type="file" id="input_${kat.id}" class="hidden" multiple>
                                     
                                     <button type="button" id="btn_select_lpj_${kat.id}" class="text-xs font-bold px-3 py-2 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-100 active:scale-95 transition-all border border-indigo-200 flex items-center shadow-sm min-h-[38px]">
                                         <i class="fa-solid fa-list-check mr-1.5 text-xs"></i> Pilih Jenis LPJ <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
@@ -752,7 +770,7 @@
                                 
                                 <!-- Action Buttons -->
                                 <div class="shrink-0 flex items-center gap-1.5">
-                                    <input type="file" id="input_${kat.id}" class="hidden">
+                                    <input type="file" id="input_${kat.id}" class="hidden" multiple>
                                     
                                     <button type="button" id="btn_upload_${kat.id}" class="text-xs font-bold px-3 py-2 bg-slate-50 text-brand-600 rounded-xl hover:bg-brand-50 hover:text-brand-700 active:scale-95 transition-all border border-brand-200 flex items-center shadow-sm min-h-[38px]">
                                         <i class="fa-solid fa-cloud-arrow-up mr-1.5 text-xs"></i> Pilih File
@@ -824,15 +842,9 @@
             const btnUpload = document.getElementById(`btn_upload_${id}`);
             const btnRemove = document.getElementById(`btn_remove_${id}`);
             const box = document.getElementById(`box_${id}`);
-            const file = input.files[0];
+            const files = input.files;
             
-            if (file) {
-                if (file.size > MAX_FILE_SIZE) {
-                    showModal('error', 'Ukuran Terlalu Besar', `Ukuran file (${formatBytes(file.size)}) melebihi batas 20 MB.`);
-                    input.value = '';
-                    return;
-                }
-
+            if (files && files.length > 0) {
                 const katObj = daftarKategori.find(k => k.id === id);
                 let finalCategoryName = namaKategori;
                 let targetDriveId = katObj ? katObj.driveId : '';
@@ -845,18 +857,44 @@
                     }
                 }
 
-                uploadedFiles[id] = {
-                    fileObj: file,
-                    driveId: targetDriveId,
-                    kategori: finalCategoryName,
-                    fileName: file.name,
-                    size: formatBytes(file.size)
-                };
+                // Reset state untuk kategori ini sebelum memproses file baru
+                uploadedFiles[id] = [];
+                let totalSize = 0;
+                let oversizeCount = 0;
 
-                status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${file.name}</span> <span class="text-slate-400">(${formatBytes(file.size)})</span>`;
-                btnUpload.classList.add('hidden');
-                btnRemove.classList.remove('hidden');
-                box.classList.add('border-emerald-300', 'bg-emerald-50/20');
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (file.size > MAX_FILE_SIZE) {
+                        oversizeCount++;
+                        continue;
+                    }
+                    totalSize += file.size;
+                    uploadedFiles[id].push({
+                        fileObj: file,
+                        driveId: targetDriveId,
+                        kategori: finalCategoryName,
+                        fileName: file.name,
+                        size: formatBytes(file.size)
+                    });
+                }
+
+                if (oversizeCount > 0) {
+                    showModal('error', 'File Terlalu Besar', `${oversizeCount} file diabaikan karena melebihi batas 20 MB per file.`);
+                }
+
+                if (uploadedFiles[id].length > 0) {
+                    if (uploadedFiles[id].length === 1) {
+                        status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${uploadedFiles[id][0].fileName}</span> <span class="text-slate-400">(${formatBytes(totalSize)})</span>`;
+                    } else {
+                        status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${uploadedFiles[id].length} File Terpilih</span> <span class="text-slate-400">(Total: ${formatBytes(totalSize)})</span>`;
+                    }
+                    btnUpload.classList.add('hidden');
+                    btnRemove.classList.remove('hidden');
+                    box.classList.add('border-emerald-300', 'bg-emerald-50/20');
+                } else {
+                    input.value = '';
+                    removeKategoriFile(id);
+                }
             }
         }
 
@@ -866,6 +904,22 @@
             const selectedKeys = Object.keys(uploadedFiles);
             if (selectedKeys.length === 0) {
                 showModal('error', 'Berkas Belum Dipilih', 'Silakan unggah minimal 1 berkas pada kategori di atas sebelum mengirim.');
+                return;
+            }
+
+            // Ratakan (flatten) semua file dari semua kategori yang dipilih
+            let allSelectedItems = [];
+            for (const key of selectedKeys) {
+                if (Array.isArray(uploadedFiles[key])) {
+                    allSelectedItems.push(...uploadedFiles[key]);
+                } else if (uploadedFiles[key]) {
+                    // Fallback jika format data lama
+                    allSelectedItems.push(uploadedFiles[key]);
+                }
+            }
+
+            if (allSelectedItems.length === 0) {
+                showModal('error', 'Berkas Valid Tidak Ditemukan', 'Tidak ada berkas valid yang siap dikirim.');
                 return;
             }
 
@@ -887,21 +941,20 @@
                 const selectedKampung = document.getElementById('namaKampung').value;
 
                 // Step 1: Pre-process & Compress image files concurrently
-                btnLoadingText.textContent = `Mengompres & menyiapkan (${selectedKeys.length} file)...`;
+                btnLoadingText.textContent = `Mengompres & menyiapkan (${allSelectedItems.length} file)...`;
                 
-                const preparedItems = await Promise.all(selectedKeys.map(async (key) => {
-                    const item = uploadedFiles[key];
-                    const processedFile = await compressImageIfNeeded(item.fileObj);
+                const preparedItems = await Promise.all(allSelectedItems.map(async (itemObj) => {
+                    const processedFile = await compressImageIfNeeded(itemObj.fileObj);
                     const base64Data = await readFileAsBase64(processedFile);
                     return {
-                        item: item,
+                        item: itemObj,
                         processedFile: processedFile,
                         base64Data: base64Data
                     };
                 }));
 
                 // Step 2: Parallel Upload via Promise.all (SUPER FAST)
-                btnLoadingText.textContent = `Mengunggah ${selectedKeys.length} file sekaligus...`;
+                btnLoadingText.textContent = `Mengunggah ${allSelectedItems.length} file sekaligus...`;
 
                 const uploadPromises = preparedItems.map(async (prep) => {
                     let fileDriveUrl = '';
@@ -941,7 +994,6 @@
                 btnLoadingText.textContent = 'Menyimpan data...';
                 const newRecord = {
                     nama: document.getElementById('namaLengkap').value,
-                    berkas: document.getElementById('namaBerkas').value,
                     kampung: selectedKampung,
                     files: listFileDiunggah,
                     waktu: timeString,
@@ -1043,9 +1095,8 @@
             const filteredData = submissionsData.filter(item => {
                 if (!query) return true;
                 const nama = (item.nama || '').toLowerCase();
-                const berkas = (item.berkas || '').toLowerCase();
                 const kampung = (item.kampung || '').toLowerCase();
-                return nama.includes(query) || berkas.includes(query) || kampung.includes(query);
+                return nama.includes(query) || kampung.includes(query);
             });
 
             document.getElementById('totalData').textContent = filteredData.length;
@@ -1086,7 +1137,6 @@
                         <td class="px-4 sm:px-6 py-3.5 text-slate-500 text-center font-bold align-top">${index + 1}</td>
                         <td class="px-4 sm:px-6 py-3.5 text-slate-500 whitespace-nowrap align-top text-xs"><i class="fa-regular fa-clock mr-1 opacity-50"></i> ${item.waktu || '-'}</td>
                         <td class="px-4 sm:px-6 py-3.5 font-bold text-slate-900 align-top">${item.nama || '-'}</td>
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top">${item.berkas || '-'}</td>
                         <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top"><span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">${item.kampung || '-'}</span></td>
                         <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top min-w-[220px]">${filesHTML}</td>
                         <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top text-center no-print">
