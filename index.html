@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FormModern - Portal Pengumpulan Data & Berkas Resmi Distrik Sidey</title>
     
-    <!-- Mengimpor font Inter & Plus Jakarta Sans -->
+    <!-- Preconnect & DNS Prefetch untuk Koneksi Tercepat ke CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://i.ibb.co.com">
+
+    <!-- Mengimpor font Inter & Plus Jakarta Sans dengan swap rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Mengimpor Tailwind CSS -->
@@ -41,14 +48,20 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
             min-height: 100vh;
             -webkit-tap-highlight-color: transparent;
+            content-visibility: auto;
         }
         
+        .animate-floating-logo, .animated-sidey-badge {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-slide-up {
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         ::-webkit-scrollbar {
@@ -184,7 +197,7 @@
                     <div class="relative w-28 h-28 sm:w-36 sm:h-36 bg-transparent flex items-center justify-center z-10">
                         <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent z-20 pointer-events-none animate-sweep-light mix-blend-overlay"></div>
                         
-                        <img src="https://i.ibb.co.com/v6JjxL8q/Chat-GPT-Image-27-Jul-2026-11-40-44.png" alt="Logo Distrik Sidey" class="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_15px_30px_rgba(16,185,129,0.25)] group-hover:scale-110 transition-all duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/144x144/ffffff/fbbf24?text=Logo'">
+                        <img src="https://i.ibb.co.com/v6JjxL8q/Chat-GPT-Image-27-Jul-2026-11-40-44.png" alt="Logo Distrik Sidey" width="144" height="144" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_15px_30px_rgba(16,185,129,0.25)] group-hover:scale-110 transition-all duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/144x144/ffffff/fbbf24?text=Logo'">
                     </div>
                 </div>
 
@@ -643,6 +656,10 @@
                 console.error("Autentikasi gagal:", err);
             }
         }
+
+        // Menampilkan UI instan (< 50ms) menggunakan data default lokal
+        renderKampungDropdown();
+        renderKategoriUI();
 
         function setupRealtimeSubmissions() {
             if (!currentUser) return;
