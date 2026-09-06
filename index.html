@@ -491,6 +491,7 @@
         ];
 
         // URL Web App Google Apps Script
+        // URL Web App Apps Script hasil deployment terbaru.
         const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxa8y4u1VhHAD4S80p2DoA4aQF7w-9bQIHNZI-aa2DDGryEDMKhdiux2l3Mrw-NBgC7/exec"; 
 
         let uploadedFiles = {}; 
@@ -873,42 +874,98 @@
                     };
                 }));
 
-                // Step 2: Parallel Upload via Promise.all (SUPER FAST)
-                btnLoadingText.textContent = `Mengunggah ${allSelectedItems.length} file sekaligus...`;
+                // Step 2: Upload ke Google Drive SATU PER SATU
+                // Upload baru dianggap berhasil jika Apps Script mengembalikan
+                // status=success dan fileUrl yang valid.
+                btnLoadingText.textContent = `Mengunggah 0/${preparedItems.length} file...`;
 
-                const uploadPromises = preparedItems.map(async (prep) => {
-                    let fileDriveUrl = '';
-                    if (GOOGLE_APPS_SCRIPT_URL) {
-                        try {
-                            const payload = {
-                                folderId: prep.item.driveId,
-                                fileName: prep.processedFile.name,
-                                mimeType: prep.processedFile.type,
-                                base64: prep.base64Data,
-                                kampung: selectedKampung
-                            };
+                const listFileDiunggah = [];
 
-                            const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                                method: 'POST',
-                                body: JSON.stringify(payload)
-                            });
-                            const result = await res.json();
-                            if (result.status === 'success') {
-                                fileDriveUrl = result.fileUrl;
-                            }
-                        } catch (uploadErr) {
-                            console.error("Gagal unggah berkas ke Drive:", uploadErr);
-                        }
+                for (let i = 0; i < preparedItems.length; i++) {
+                    const prep = preparedItems[i];
+
+                    if (!GOOGLE_APPS_SCRIPT_URL) {
+                        throw new Error('URL Google Apps Script belum diisi.');
                     }
 
-                    return {
+                    const payload = {
+                        folderId: prep.item.driveId,
+                        fileName: prep.processedFile.name,
+                        mimeType: prep.processedFile.type || 'application/octet-stream',
+                        base64: prep.base64Data,
+                        kampung: selectedKampung
+                    };
+
+                    btnLoadingText.textContent =
+                        `Mengunggah ${i + 1}/${preparedItems.length}: ${prep.processedFile.name}`;
+
+                    console.log('Mengirim upload ke Apps Script:', {
+                        fileName: payload.fileName,
+                        mimeType: payload.mimeType,
+                        folderId: payload.folderId,
+                        kampung: payload.kampung,
+                        base64Length: payload.base64.length
+                    });
+
+                    let result;
+
+                    try {
+                        const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'text/plain;charset=utf-8'
+                            },
+                            redirect: 'follow',
+                            body: JSON.stringify(payload)
+                        });
+
+                        console.log('HTTP status:', res.status);
+                        console.log('Response URL:', res.url);
+
+                        if (!res.ok) {
+                            throw new Error(`Server mengembalikan HTTP ${res.status}`);
+                        }
+
+                        const responseText = await res.text();
+                        console.log('Respons mentah Apps Script:', responseText);
+
+                        try {
+                            result = JSON.parse(responseText);
+                        } catch (jsonErr) {
+                            throw new Error(
+                                'Respons Apps Script bukan JSON yang valid. Pastikan Web App sudah di-deploy ulang dan URL /exec yang digunakan benar.'
+                            );
+                        }
+
+                    } catch (uploadErr) {
+                        console.error(`Gagal mengunggah ${prep.processedFile.name}:`, uploadErr);
+                        throw new Error(
+                            `File "${prep.processedFile.name}" gagal diunggah ke Google Drive. ${uploadErr.message}`
+                        );
+                    }
+
+                    if (!result || result.status !== 'success') {
+                        throw new Error(
+                            result?.message ||
+                            `Apps Script menolak upload file "${prep.processedFile.name}".`
+                        );
+                    }
+
+                    if (!result.fileUrl) {
+                        throw new Error(
+                            `File "${prep.processedFile.name}" dilaporkan berhasil, tetapi URL Drive tidak diterima.`
+                        );
+                    }
+
+                    listFileDiunggah.push({
                         kategori: prep.item.kategori,
                         fileName: prep.processedFile.name,
-                        fileUrl: fileDriveUrl
-                    };
-                });
+                        fileUrl: result.fileUrl,
+                        fileId: result.fileId || ''
+                    });
 
-                const listFileDiunggah = await Promise.all(uploadPromises);
+                    console.log('UPLOAD BERHASIL:', listFileDiunggah[listFileDiunggah.length - 1]);
+                }
 
                 // Step 3: Save metadata to Firestore
                 btnLoadingText.textContent = 'Menyimpan data...';
@@ -929,7 +986,11 @@
                 resetAllKategori();
             } catch (err) {
                 console.error("Gagal mengirim data:", err);
-                showModal('error', 'Gagal Mengirim', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                showModal(
+                    'error',
+                    'Gagal Mengirim',
+                    err?.message || 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.'
+                );
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
