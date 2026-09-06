@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FormModern - Portal Pengumpulan Data & Berkas Resmi Distrik Sidey</title>
     
+    <!-- Preconnect ke CDN Aset -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
     <!-- Mengimpor font Inter & Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -100,13 +105,7 @@
         }
         .animate-floating-logo {
             animation: floatLogo 4s ease-in-out infinite;
-        }
-        
-        @keyframes spinSlow {
-            100% { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-            animation: spinSlow 10s linear infinite;
+            will-change: transform;
         }
         
         @keyframes sweepLight {
@@ -196,7 +195,7 @@
                         <!-- Efek kilapan cahaya melintas (sweep light) pada kaca logo -->
                         <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent z-20 pointer-events-none animate-sweep-light mix-blend-overlay"></div>
                         
-                        <img src="https://i.ibb.co.com/v6JjxL8q/Chat-GPT-Image-27-Jul-2026-11-40-44.png" alt="Logo Distrik Sidey" class="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_15px_30px_rgba(16,185,129,0.25)] group-hover:scale-110 transition-all duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/144x144/ffffff/fbbf24?text=Logo'">
+                        <img src="https://i.ibb.co.com/v6JjxL8q/Chat-GPT-Image-27-Jul-2026-11-40-44.png" width="144" height="144" loading="eager" fetchpriority="high" alt="Logo Distrik Sidey" class="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_15px_30px_rgba(16,185,129,0.25)] group-hover:scale-110 transition-all duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/144x144/ffffff/fbbf24?text=Logo'">
                     </div>
                 </div>
 
@@ -207,7 +206,6 @@
 
                 <!-- Subtitle Sub-Header Mewah & Modern -->
                 <div class="mt-2.5 flex flex-col items-center justify-center gap-1.5">
-                    <!-- Badge Distrik Sidey Bergerak & Mewah (Tanpa Mahkota) -->
                     <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full animated-sidey-badge shadow-lg shadow-amber-500/10 cursor-default my-1">
                         <span class="relative flex h-2.5 w-2.5">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -218,7 +216,6 @@
                         </span>
                     </div>
 
-                    <!-- Teks Subtitle dengan Tampilan Mewah & Modern -->
                     <p class="text-xs sm:text-sm font-semibold tracking-wide text-slate-600 max-w-md mx-auto leading-relaxed pt-0.5">
                         <span class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-800 bg-clip-text text-transparent font-extrabold border-b border-brand-200 pb-0.5">
                             Portal Pengumpulan Data & Berkas Resmi
@@ -281,7 +278,7 @@
                     <p class="text-[11px] sm:text-xs text-slate-500 mb-3">Pilih satu atau beberapa kategori file (Foto/PDF/Doc). Sistem akan mengompres foto secara otomatis agar pengiriman super cepat!</p>
                     
                     <div class="space-y-2.5 sm:space-y-3" id="kategoriContainer">
-                        <!-- List Kategori akan dimuat oleh JS secara rapi -->
+                        <!-- List Kategori Langsung Terisi di HTML (Pasti Muncul Instant Tanpa Menunggu JS/Jaringan) -->
                     </div>
                 </div>
 
@@ -305,7 +302,7 @@
     </div>
 
     <!-- Modal Global Notifications -->
-    <div id="customModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="customModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 pointer-events-none">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6 text-center" id="modalContent">
             <div id="modalIconContainer" class="mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full mb-3.5"></div>
@@ -318,7 +315,7 @@
     </div>
 
     <!-- Modal Kata Sandi Admin -->
-    <div id="passwordModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="passwordModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 pointer-events-none">
         <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity opacity-0" id="passwordBackdrop"></div>
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6" id="passwordContent">
             <div class="text-center mb-4">
@@ -337,13 +334,13 @@
     </div>
 
     <!-- Modal Konfirmasi Hapus Data -->
-    <div id="deleteConfirmModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="deleteConfirmModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 pointer-events-none">
         <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity opacity-0" id="deleteConfirmBackdrop"></div>
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6 text-center" id="deleteConfirmContent">
             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 mb-3">
                 <i class="fa-solid fa-trash-can text-xl"></i>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" id="deleteModalTitle">Hapus Data Berkas?</h3>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5">Hapus Data Berkas?</h3>
             <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data berkas ini?</p>
             <div class="flex gap-2.5">
                 <button type="button" id="cancelDeleteBtn" class="w-1/2 rounded-xl border border-slate-300 px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Batal</button>
@@ -355,148 +352,70 @@
         </div>
     </div>
 
-    <!-- Dashboard Admin & Pengelolaan Data/Kampung/Kategori -->
     <div id="adminDashboard" class="fixed inset-0 z-40 hidden bg-slate-50 overflow-y-auto">
         <div class="min-h-screen p-3 sm:p-6 lg:p-8 pb-24">
-            <div class="max-w-7xl mx-auto space-y-6">
-                <!-- Header Dashboard -->
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 no-print hide-in-preview">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 no-print hide-in-preview">
                     <div class="flex items-center gap-3 sm:gap-4">
                         <div class="h-10 w-10 sm:h-12 sm:w-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center border border-brand-100 shadow-sm shrink-0">
-                            <i class="fa-solid fa-sliders text-lg sm:text-xl"></i>
+                            <i class="fa-solid fa-table-list text-lg sm:text-xl"></i>
                         </div>
                         <div>
-                            <h2 class="text-lg sm:text-2xl font-bold text-slate-900 tracking-tight">Panel Pengelola Admin</h2>
-                            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Kelola rekap data, nama kampung, dan kategori berkas Google Drive</p>
+                            <h2 class="text-lg sm:text-2xl font-bold text-slate-900 tracking-tight">Rekap Data Berkas</h2>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Total <span id="totalData" class="font-bold text-brand-600">0</span> data terkumpul</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2 w-full sm:w-auto pt-1 sm:pt-0">
-                        <button id="backToFormBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-arrow-left mr-1.5"></i>Kembali Ke Form</button>
+                        <button id="backToFormBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-arrow-left mr-1.5"></i>Kembali</button>
                         <button id="previewDataBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-sky-50 text-sky-700 rounded-xl hover:bg-sky-100 border border-sky-100 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center"><i class="fa-solid fa-expand mr-1.5"></i>Pratinjau</button>
                         <button id="printDataBtn" class="flex-1 sm:flex-none px-3.5 py-2 bg-brand-600 text-white rounded-xl hover:bg-brand-700 shadow-sm text-xs sm:text-sm font-bold transition-colors flex items-center justify-center"><i class="fa-solid fa-print mr-1.5"></i>Cetak</button>
                     </div>
                 </div>
 
-                <div class="flex border-b border-slate-200 bg-white rounded-xl p-1.5 shadow-sm no-print hide-in-preview gap-1">
-                    <button id="tabRekapBtn" class="flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold bg-brand-600 text-white transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-table-list"></i> Rekap Berkas (<span id="totalDataTab">0</span>)
+                <div class="mb-4 no-print hide-in-preview">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
+                        <input type="text" id="adminSearchInput" placeholder="Cari berdasarkan nama atau kampung..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
+                    </div>
+                </div>
+
+                <div id="exitPreviewContainer" class="hidden fixed top-4 right-4 z-50 no-print animate-slide-up">
+                    <button id="exitPreviewBtn" class="px-4 py-2 bg-slate-900 text-white rounded-xl shadow-2xl font-bold text-xs sm:text-sm flex items-center gap-2 hover:bg-slate-800 transition-all border border-slate-700">
+                        <i class="fa-solid fa-arrow-left"></i> Keluar Pratinjau
                     </button>
-                    <button id="tabKampungBtn" class="flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-map-location-dot"></i> Kelola Kampung
-                    </button>
-                    <button id="tabKategoriBtn" class="flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-folder-plus"></i> Kelola Kategori
-                    </button>
                 </div>
 
-                <div id="sectionRekap" class="space-y-4">
-                    <!-- Search / Filter Input -->
-                    <div class="no-print hide-in-preview">
-                        <div class="relative">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
-                            <input type="text" id="adminSearchInput" placeholder="Cari berdasarkan nama atau kampung..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
-                        </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-area" id="printableArea">
+                    <div class="p-4 sm:p-6 border-b border-slate-100 hidden print:block">
+                        <h1 class="text-xl font-bold text-center text-slate-900">Laporan Pengumpulan Berkas FormModern - Distrik Sidey</h1>
+                        <p class="text-center text-slate-500 text-xs sm:text-sm mt-1" id="printDate"></p>
                     </div>
-
-                    <!-- Floating Exit Preview Button -->
-                    <div id="exitPreviewContainer" class="hidden fixed top-4 right-4 z-50 no-print animate-slide-up">
-                        <button id="exitPreviewBtn" class="px-4 py-2 bg-slate-900 text-white rounded-xl shadow-2xl font-bold text-xs sm:text-sm flex items-center gap-2 hover:bg-slate-800 transition-all border border-slate-700">
-                            <i class="fa-solid fa-arrow-left"></i> Keluar Pratinjau
-                        </button>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200">
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider w-12 text-center">No</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Waktu Input</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Lengkap</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Kampung / Desa</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">File Lampiran</th>
+                                    <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider text-center no-print">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm">
+                            </tbody>
+                        </table>
                     </div>
-
-                    <!-- Tabel Area -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-area" id="printableArea">
-                        <div class="p-4 sm:p-6 border-b border-slate-100 hidden print:block">
-                            <h1 class="text-xl font-bold text-center text-slate-900">Laporan Pengumpulan Berkas FormModern - Distrik Sidey</h1>
-                            <p class="text-center text-slate-500 text-xs sm:text-sm mt-1" id="printDate"></p>
+                    
+                    <div id="emptyState" class="p-12 text-center hidden">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 mb-3 border border-slate-100">
+                            <i class="fa-regular fa-folder-open text-3xl text-slate-300"></i>
                         </div>
-                        
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse min-w-[700px]">
-                                <thead>
-                                    <tr class="bg-slate-50 border-b border-slate-200">
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider w-12 text-center">No</th>
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Waktu Input</th>
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Nama Lengkap</th>
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Kampung / Desa</th>
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">File Lampiran</th>
-                                        <th class="px-4 sm:px-6 py-3.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider text-center no-print">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dataTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm">
-                                    <!-- Data tabel diinject via JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div id="emptyState" class="p-12 text-center hidden">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 mb-3 border border-slate-100">
-                                <i class="fa-regular fa-folder-open text-3xl text-slate-300"></i>
-                            </div>
-                            <h4 class="text-slate-800 font-bold text-base">Belum Ada Data</h4>
-                            <p class="text-slate-500 text-xs mt-1 max-w-xs mx-auto">Data yang dikirim melalui formulir akan otomatis tersusun di tabel ini.</p>
-                        </div>
+                        <h4 class="text-slate-800 font-bold text-base">Belum Ada Data</h4>
+                        <p class="text-slate-500 text-xs mt-1 max-w-xs mx-auto">Data yang dikirim melalui formulir akan otomatis tersusun di tabel ini.</p>
                     </div>
                 </div>
-
-                <div id="sectionKampung" class="hidden space-y-4">
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-plus-circle text-brand-600"></i> Tambah Nama Kampung Baru
-                        </h3>
-                        <p class="text-xs text-slate-500 mb-4">Nama kampung yang ditambahkan akan langsung muncul pada pilihan dropdown di formulir publik.</p>
-                        <form id="addKampungForm" class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="newKampungInput" required placeholder="Contoh: Sidey Indah" class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                            <button type="submit" class="px-5 py-2.5 bg-brand-600 text-white rounded-xl font-bold text-xs sm:text-sm hover:bg-brand-700 transition-all flex items-center justify-center gap-1.5 shadow-md active:scale-95">
-                                <i class="fa-solid fa-plus"></i> Tambah Kampung
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-slate-700"></i> Daftar Nama Kampung
-                        </h3>
-                        <div id="kampungListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-                            <!-- List Kampung diinject via JS -->
-                        </div>
-                    </div>
-                </div>
-
-                <div id="sectionKategori" class="hidden space-y-4">
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-folder-plus text-emerald-600"></i> Tambah Kategori Berkas Baru
-                        </h3>
-                        <p class="text-xs text-slate-500 mb-4">Masukkan nama kategori dan ID atau Link Folder Google Drive tempat menyimpan berkas.</p>
-                        <form id="addKategoriForm" class="space-y-3">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Kategori <span class="text-red-500">*</span></label>
-                                    <input type="text" id="newKategoriNama" required placeholder="Contoh: Data Laporan Keuangan" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Link / ID Folder Google Drive <span class="text-red-500">*</span></label>
-                                    <input type="text" id="newKategoriDrive" required placeholder="https://drive.google.com/drive/folders/ID_FOLDER" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                                </div>
-                            </div>
-                            <button type="submit" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs sm:text-sm hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5 shadow-md active:scale-95">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Simpan & Hubungkan Kategori Drive
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-folder-open text-amber-500"></i> Daftar Kategori Berkas Aktif
-                        </h3>
-                        <div id="kategoriAdminListContainer" class="space-y-2.5">
-                            <!-- List Kategori Admin diinject via JS -->
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -504,7 +423,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
@@ -545,15 +464,8 @@
 
         let submissionsData = [];
 
-        // Data Bawaan Nama Kampung
-        const defaultKampungList = [
-            "Kaironi", "Kasi", "Manggupi", "Meyof 1", "Saray", 
-            "Sidey", "Sidey Baru", "Sidey Jaya", "Sidey Makmur", 
-            "Waramui", "Wariki", "Womnowi"
-        ];
-
-        // Data Bawaan Kategori
-        const defaultDaftarKategori = [
+        // Kategori Data Lengkap dengan Folder ID Google Drive
+        const daftarKategori = [
             { id: 'kat1', nama: 'Data Nominatif Kampung', driveId: '1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs', driveLink: 'https://drive.google.com/drive/folders/1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs?usp=drive_link' },
             { id: 'kat2', nama: 'Data Perangkat Bamuskam', driveId: '1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm', driveLink: 'https://drive.google.com/drive/folders/1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm?usp=drive_link' },
             { id: 'kat3', nama: 'Data Perangkat Kampung', driveId: '1GcveHyna6MJePWNWhVd52D2q-wNLZyWR', driveLink: 'https://drive.google.com/drive/folders/1GcveHyna6MJePWNWhVd52D2q-wNLZyWR?usp=drive_link' },
@@ -570,15 +482,13 @@
             }
         ];
 
-        let listKampungState = [];
-        let daftarKategoriState = [];
-
-        // URL Web App Google Apps Script
-        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRGaYbsCVw7wk_3vfFy4SdDKr7XYr4H9OFWucmStCCyuuQA-fmtAD0D0sXBqKdzD3A/exec"; 
+        // URL Web App Google Apps Script Terbaru (Diperbarui)
+        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwj1xuTxX8ux0N42Fxv8S6bzg8_XuzBNCtDOm3IRdFs6fXIix_VU8yyk1NchT93A45i1Q/exec"; 
 
         let uploadedFiles = {}; 
         const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 
+        // Auth Init
         async function initAuthAndDataSync() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -588,15 +498,13 @@
                     const userCred = await signInAnonymously(auth);
                     currentUser = userCred.user;
                 }
-                
-                setupRealtimeSubmissions();
-                setupRealtimeMasterData();
+                setupRealtimeListener();
             } catch (err) {
-                console.error("Autentikasi gagal:", err);
+                console.error("Autentikasi awal:", err);
             }
         }
 
-        function setupRealtimeSubmissions() {
+        function setupRealtimeListener() {
             if (!currentUser) return;
             const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
             onSnapshot(submissionsCol, (snapshot) => {
@@ -610,111 +518,6 @@
                 }
             }, (error) => {
                 console.error("Gagal mendengarkan data Firestore:", error);
-            });
-        }
-
-        function setupRealtimeMasterData() {
-            if (!currentUser) return;
-
-            // 1. Sync Kampung Data
-            const kampungCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kampung');
-            onSnapshot(kampungCol, async (snapshot) => {
-                if (snapshot.empty) {
-                    // Seed default data jika kosong
-                    for (const nama of defaultKampungList) {
-                        await addDoc(kampungCol, { nama: nama });
-                    }
-                    return;
-                }
-                
-                listKampungState = [];
-                snapshot.forEach(doc => {
-                    listKampungState.push({ id: doc.id, ...doc.data() });
-                });
-                listKampungState.sort((a, b) => (a.nama || '').localeCompare(b.nama || ''));
-                
-                renderKampungDropdown();
-                renderAdminKampungList();
-            }, (err) => console.error("Error sync kampung:", err));
-
-            // 2. Sync Kategori Data
-            const kategoriCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
-            onSnapshot(kategoriCol, async (snapshot) => {
-                if (snapshot.empty) {
-                    // Seed default data jika kosong
-                    for (const kat of defaultDaftarKategori) {
-                        await addDoc(kategoriCol, kat);
-                    }
-                    return;
-                }
-
-                daftarKategoriState = [];
-                snapshot.forEach(doc => {
-                    daftarKategoriState.push({ docId: doc.id, ...doc.data() });
-                });
-
-                renderKategoriUI();
-                renderAdminKategoriList();
-            }, (err) => console.error("Error sync kategori:", err));
-        }
-
-        function renderKampungDropdown() {
-            const select = document.getElementById('namaKampung');
-            if (!select) return;
-
-            const selectedValue = select.value;
-            select.innerHTML = '<option value="" disabled selected>-- Pilih Nama Kampung --</option>';
-
-            listKampungState.forEach(item => {
-                const opt = document.createElement('option');
-                opt.value = item.nama;
-                opt.textContent = item.nama;
-                if (item.nama === selectedValue) opt.selected = true;
-                select.appendChild(opt);
-            });
-        }
-
-        function renderAdminKampungList() {
-            const container = document.getElementById('kampungListContainer');
-            if (!container) return;
-
-            container.innerHTML = '';
-            listKampungState.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'p-3 rounded-xl border border-slate-200 bg-slate-50/80 flex items-center justify-between text-xs font-bold text-slate-800';
-                card.innerHTML = `
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-500"></i> ${item.nama}</span>
-                    <button type="button" onclick="askDeleteKampung('${item.id}', '${(item.nama || '').replace(/'/g, "\\'")}')" class="text-red-600 hover:bg-red-100 p-1.5 rounded-lg border border-red-200 transition-all active:scale-95" title="Hapus Kampung">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function renderAdminKategoriList() {
-            const container = document.getElementById('kategoriAdminListContainer');
-            if (!container) return;
-
-            container.innerHTML = '';
-            daftarKategoriState.forEach(kat => {
-                const card = document.createElement('div');
-                card.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs';
-                
-                let linkHtml = kat.driveLink 
-                    ? `<a href="${kat.driveLink}" target="_blank" class="text-emerald-700 font-bold hover:underline inline-flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka Folder Drive</a>`
-                    : `<span class="text-slate-400 block mt-0.5">ID Drive: ${kat.driveId || '-'}</span>`;
-
-                card.innerHTML = `
-                    <div>
-                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2"><i class="fa-solid fa-folder text-amber-500"></i> ${kat.nama}</h4>
-                        ${linkHtml}
-                    </div>
-                    <button type="button" onclick="askDeleteKategori('${kat.docId}', '${(kat.nama || '').replace(/'/g, "\\'")}')" class="self-end sm:self-center px-3 py-1.5 bg-red-50 text-red-600 font-bold rounded-lg border border-red-200 hover:bg-red-100 active:scale-95 transition-all flex items-center gap-1">
-                        <i class="fa-solid fa-trash-can"></i> Hapus Kategori
-                    </button>
-                `;
-                container.appendChild(card);
             });
         }
 
@@ -801,7 +604,7 @@
                 closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-emerald-700 transition-colors';
             }
 
-            modal.classList.remove('hidden');
+            modal.classList.remove('hidden', 'pointer-events-none');
             setTimeout(() => {
                 modalBackdrop.classList.remove('opacity-0');
                 modalContent.classList.remove('opacity-0', 'scale-95');
@@ -813,20 +616,21 @@
             modalBackdrop.classList.add('opacity-0');
             modalContent.classList.remove('opacity-100', 'scale-100');
             modalContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 250);
+            setTimeout(() => modal.classList.add('hidden', 'pointer-events-none'), 250);
         }
 
         closeModalBtn.addEventListener('click', hideModal);
 
+        // Render UI Kategori Instan
         function renderKategoriUI() {
+            if (!kategoriContainer) return;
             kategoriContainer.innerHTML = '';
-            const activeKategori = daftarKategoriState.length > 0 ? daftarKategoriState : defaultDaftarKategori;
-
-            activeKategori.forEach((kat, index) => {
+            
+            daftarKategori.forEach((kat, index) => {
                 const no = index + 1;
 
                 if (kat.isLPJ) {
-                    let subHtml = kat.subCategories.map((sub, sIdx) => `
+                    let subHtml = kat.subCategories.map((sub) => `
                         <div id="box_${sub.id}" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div class="min-w-0">
                                 <span class="font-bold text-xs text-indigo-900 flex items-center gap-1.5">
@@ -856,7 +660,7 @@
                                 <div class="mt-0.5 shrink-0 w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center text-[11px] font-extrabold text-indigo-600 border border-indigo-100">${no}</div>
                                 <div>
                                     <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">${kat.nama}</h4>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">Unggah berkas Alokasi Dana Desa & Pelaporan Dana Desa di bawah ini:</p>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Anda dapat mengunggah berkas Alokasi Dana Desa & Pelaporan Dana Desa sekaligus di bawah ini:</p>
                                 </div>
                             </div>
                             <div class="space-y-2 mt-1">
@@ -868,15 +672,17 @@
 
                     kat.subCategories.forEach(sub => {
                         const subName = `${kat.nama} - ${sub.nama}`;
-                        document.getElementById(`btn_upload_${sub.id}`)?.addEventListener('click', () => {
-                            document.getElementById(`input_${sub.id}`).click();
-                        });
-                        document.getElementById(`input_${sub.id}`)?.addEventListener('change', () => {
-                            handleKategoriFile(sub.id, subName, sub.driveId);
-                        });
-                        document.getElementById(`btn_remove_${sub.id}`)?.addEventListener('click', () => {
-                            removeKategoriFile(sub.id);
-                        });
+                        const uploadBtn = document.getElementById(`btn_upload_${sub.id}`);
+                        const inputEl = document.getElementById(`input_${sub.id}`);
+                        const removeBtn = document.getElementById(`btn_remove_${sub.id}`);
+
+                        if (uploadBtn && inputEl) {
+                            uploadBtn.addEventListener('click', () => inputEl.click());
+                            inputEl.addEventListener('change', () => handleKategoriFile(sub.id, subName, sub.driveId));
+                        }
+                        if (removeBtn) {
+                            removeBtn.addEventListener('click', () => removeKategoriFile(sub.id));
+                        }
                     });
 
                 } else {
@@ -914,15 +720,17 @@
                     `;
                     kategoriContainer.insertAdjacentHTML('beforeend', html);
 
-                    document.getElementById(`btn_upload_${kat.id}`)?.addEventListener('click', () => {
-                        document.getElementById(`input_${kat.id}`).click();
-                    });
-                    document.getElementById(`input_${kat.id}`)?.addEventListener('change', () => {
-                        handleKategoriFile(kat.id, kat.nama, kat.driveId);
-                    });
-                    document.getElementById(`btn_remove_${kat.id}`)?.addEventListener('click', () => {
-                        removeKategoriFile(kat.id);
-                    });
+                    const uploadBtn = document.getElementById(`btn_upload_${kat.id}`);
+                    const inputEl = document.getElementById(`input_${kat.id}`);
+                    const removeBtn = document.getElementById(`btn_remove_${kat.id}`);
+
+                    if (uploadBtn && inputEl) {
+                        uploadBtn.addEventListener('click', () => inputEl.click());
+                        inputEl.addEventListener('change', () => handleKategoriFile(kat.id, kat.nama, kat.driveId));
+                    }
+                    if (removeBtn) {
+                        removeBtn.addEventListener('click', () => removeKategoriFile(kat.id));
+                    }
                 }
             });
         }
@@ -944,8 +752,7 @@
         }
 
         function resetAllKategori() {
-            const activeKategori = daftarKategoriState.length > 0 ? daftarKategoriState : defaultDaftarKategori;
-            activeKategori.forEach(kat => {
+            daftarKategori.forEach(kat => {
                 if (kat.isLPJ) {
                     kat.subCategories.forEach(sub => removeKategoriFile(sub.id));
                 } else {
@@ -954,13 +761,16 @@
             });
         }
 
+        // Render UI Kategori langsung seketika saat JS dijalankan
+        renderKategoriUI();
+
         function handleKategoriFile(id, namaKategori, targetDriveId) {
             const input = document.getElementById(`input_${id}`);
             const status = document.getElementById(`status_${id}`);
             const btnUpload = document.getElementById(`btn_upload_${id}`);
             const btnRemove = document.getElementById(`btn_remove_${id}`);
             const box = document.getElementById(`box_${id}`);
-            const files = input.files;
+            const files = input ? input.files : null;
             
             if (files && files.length > 0) {
                 uploadedFiles[id] = [];
@@ -993,11 +803,11 @@
                     } else {
                         status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${uploadedFiles[id].length} File Terpilih</span> <span class="text-slate-400">(Total: ${formatBytes(totalSize)})</span>`;
                     }
-                    btnUpload.classList.add('hidden');
-                    btnRemove.classList.remove('hidden');
+                    if (btnUpload) btnUpload.classList.add('hidden');
+                    if (btnRemove) btnRemove.classList.remove('hidden');
                     if (box) box.classList.add('border-emerald-300', 'bg-emerald-50/20');
                 } else {
-                    input.value = '';
+                    if (input) input.value = '';
                     removeKategoriFile(id);
                 }
             }
@@ -1023,11 +833,6 @@
 
             if (allSelectedItems.length === 0) {
                 showModal('error', 'Berkas Valid Tidak Ditemukan', 'Tidak ada berkas valid yang siap dikirim.');
-                return;
-            }
-
-            if (!currentUser) {
-                showModal('error', 'Koneksi Terputus', 'Sedang menghubungkan ke server. Silakan coba sebentar lagi.');
                 return;
             }
 
@@ -1099,8 +904,10 @@
                     createdAt: Date.now()
                 };
 
-                const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
-                await addDoc(submissionsCol, newRecord);
+                if (db && currentUser) {
+                    const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+                    await addDoc(submissionsCol, newRecord);
+                }
 
                 showModal('success', 'Data Berhasil Terkirim!', 'Data dan berkas telah berhasil tersimpan dengan cepat ke Google Drive & Cloud Database.');
                 
@@ -1129,7 +936,6 @@
         const deleteConfirmModal = document.getElementById('deleteConfirmModal');
         const deleteConfirmBackdrop = document.getElementById('deleteConfirmBackdrop');
         const deleteConfirmContent = document.getElementById('deleteConfirmContent');
-        const deleteModalTitle = document.getElementById('deleteModalTitle');
         const deleteConfirmMessage = document.getElementById('deleteConfirmMessage');
         const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
         const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
@@ -1137,7 +943,6 @@
         const btnDeleteLoading = document.getElementById('btnDeleteLoading');
 
         let itemToDeleteId = null;
-        let deleteType = 'submission'; // 'submission', 'kampung', 'kategori'
 
         const adminDashboard = document.getElementById('adminDashboard');
         const backToFormBtn = document.getElementById('backToFormBtn');
@@ -1150,31 +955,9 @@
         const tableElement = document.querySelector('table');
         const adminSearchInput = document.getElementById('adminSearchInput');
 
-        // Elements Tab Admin
-        const tabRekapBtn = document.getElementById('tabRekapBtn');
-        const tabKampungBtn = document.getElementById('tabKampungBtn');
-        const tabKategoriBtn = document.getElementById('tabKategoriBtn');
-        const sectionRekap = document.getElementById('sectionRekap');
-        const sectionKampung = document.getElementById('sectionKampung');
-        const sectionKategori = document.getElementById('sectionKategori');
-
-        function switchTab(tab) {
-            tabRekapBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'rekap' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-            tabKampungBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'kampung' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-            tabKategoriBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'kategori' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-
-            sectionRekap.classList.toggle('hidden', tab !== 'rekap');
-            sectionKampung.classList.toggle('hidden', tab !== 'kampung');
-            sectionKategori.classList.toggle('hidden', tab !== 'kategori');
-        }
-
-        tabRekapBtn.addEventListener('click', () => switchTab('rekap'));
-        tabKampungBtn.addEventListener('click', () => switchTab('kampung'));
-        tabKategoriBtn.addEventListener('click', () => switchTab('kategori'));
-
         function showPasswordModal() {
             adminPasswordInput.value = '';
-            passwordModal.classList.remove('hidden');
+            passwordModal.classList.remove('hidden', 'pointer-events-none');
             setTimeout(() => {
                 passwordBackdrop.classList.remove('opacity-0');
                 passwordContent.classList.remove('opacity-0', 'scale-95');
@@ -1187,17 +970,16 @@
             passwordBackdrop.classList.add('opacity-0');
             passwordContent.classList.remove('opacity-100', 'scale-100');
             passwordContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => passwordModal.classList.add('hidden'), 250);
+            setTimeout(() => passwordModal.classList.add('hidden', 'pointer-events-none'), 250);
         }
 
         function verifyPassword() {
-            // Memeriksa password rahasia Latsar2026
-            if (adminPasswordInput.value === 'Latsar2026') {
+            if (adminPasswordInput.value === 'Latsar026') {
                 hidePasswordModal();
                 openAdminDashboard();
             } else {
                 hidePasswordModal();
-                setTimeout(() => showModal('error', 'Akses Ditolak', 'Kata sandi rahasia salah.'), 300);
+                setTimeout(() => showModal('error', 'Akses Ditolak', 'Kata sandi salah.'), 300);
             }
         }
 
@@ -1208,7 +990,6 @@
             if (e.key === 'Enter') verifyPassword();
         });
 
-        // Search Filter Event
         if (adminSearchInput) {
             adminSearchInput.addEventListener('input', renderTable);
         }
@@ -1223,7 +1004,7 @@
                 return nama.includes(query) || kampung.includes(query);
             });
 
-            document.getElementById('totalDataTab').textContent = filteredData.length;
+            document.getElementById('totalData').textContent = filteredData.length;
             dataTableBody.innerHTML = '';
             
             if (filteredData.length === 0) {
@@ -1274,105 +1055,26 @@
             }
         }
 
-        // Form Tambah Kampung
-        document.getElementById('addKampungForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const input = document.getElementById('newKampungInput');
-            const namaBaru = input.value.trim();
-            if (!namaBaru || !currentUser) return;
-
-            try {
-                const kampungCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kampung');
-                await addDoc(kampungCol, { nama: namaBaru });
-                input.value = '';
-                showModal('success', 'Kampung Ditambahkan', `Nama kampung "${namaBaru}" berhasil ditambahkan.`);
-            } catch (err) {
-                console.error("Gagal menambah kampung:", err);
-                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menyimpan nama kampung.');
-            }
-        });
-
-        // Form Tambah Kategori
-        document.getElementById('addKategoriForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const namaInput = document.getElementById('newKategoriNama');
-            const driveInput = document.getElementById('newKategoriDrive');
-            
-            const namaBaru = namaInput.value.trim();
-            let driveVal = driveInput.value.trim();
-            if (!namaBaru || !driveVal || !currentUser) return;
-
-            // Ekstrak Drive Folder ID jika memasukkan Link Lengkap
-            let driveId = driveVal;
-            if (driveVal.includes('/folders/')) {
-                const parts = driveVal.split('/folders/');
-                if (parts[1]) {
-                    driveId = parts[1].split('?')[0];
-                }
-            }
-
-            const customId = 'kat_' + Date.now();
-            const newCatData = {
-                id: customId,
-                nama: namaBaru,
-                driveId: driveId,
-                driveLink: driveVal.startsWith('http') ? driveVal : `https://drive.google.com/drive/folders/${driveId}?usp=drive_link`
-            };
-
-            try {
-                const kategoriCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
-                await addDoc(kategoriCol, newCatData);
-
-                namaInput.value = '';
-                driveInput.value = '';
-                showModal('success', 'Kategori Ditambahkan', `Kategori "${namaBaru}" berhasil dibuat dan terhubung ke Google Drive.`);
-            } catch (err) {
-                console.error("Gagal menambah kategori:", err);
-                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menyimpan kategori baru.');
-            }
-        });
-
         window.askDeleteRecord = function(id, nama) {
             itemToDeleteId = id;
-            deleteType = 'submission';
-            deleteModalTitle.textContent = 'Hapus Data Berkas?';
             deleteConfirmMessage.textContent = nama 
                 ? `Apakah Anda yakin ingin menghapus berkas milik "${nama}"?` 
                 : 'Apakah Anda yakin ingin menghapus data ini?';
-            openDeleteModal();
-        };
-
-        window.askDeleteKampung = function(id, nama) {
-            itemToDeleteId = id;
-            deleteType = 'kampung';
-            deleteModalTitle.textContent = 'Hapus Nama Kampung?';
-            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kampung "${nama}" dari daftar pilihan?`;
-            openDeleteModal();
-        };
-
-        window.askDeleteKategori = function(id, nama) {
-            itemToDeleteId = id;
-            deleteType = 'kategori';
-            deleteModalTitle.textContent = 'Hapus Kategori Berkas?';
-            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kategori "${nama}"? Kategori ini tidak akan lagi tampil di formulir.`;
-            openDeleteModal();
-        };
-
-        function openDeleteModal() {
-            deleteConfirmModal.classList.remove('hidden');
+            
+            deleteConfirmModal.classList.remove('hidden', 'pointer-events-none');
             setTimeout(() => {
                 deleteConfirmBackdrop.classList.remove('opacity-0');
                 deleteConfirmContent.classList.remove('opacity-0', 'scale-95');
                 deleteConfirmContent.classList.add('opacity-100', 'scale-100');
             }, 10);
-        }
+        };
 
         function hideDeleteModal() {
             deleteConfirmBackdrop.classList.add('opacity-0');
             deleteConfirmContent.classList.remove('opacity-100', 'scale-100');
             deleteConfirmContent.classList.add('opacity-0', 'scale-95');
             setTimeout(() => {
-                deleteConfirmModal.classList.add('hidden');
+                deleteConfirmModal.classList.add('hidden', 'pointer-events-none');
                 itemToDeleteId = null;
             }, 250);
         }
@@ -1387,19 +1089,11 @@
             btnDeleteLoading.classList.remove('hidden');
 
             try {
-                if (deleteType === 'submission') {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', itemToDeleteId);
-                    await deleteDoc(docRef);
-                } else if (deleteType === 'kampung') {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'master_kampung', itemToDeleteId);
-                    await deleteDoc(docRef);
-                } else if (deleteType === 'kategori') {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'master_kategori', itemToDeleteId);
-                    await deleteDoc(docRef);
-                }
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', itemToDeleteId);
+                await deleteDoc(docRef);
 
                 hideDeleteModal();
-                setTimeout(() => showModal('success', 'Berhasil Dihapus', 'Data telah berhasil dihapus dari Cloud Database.'), 300);
+                setTimeout(() => showModal('success', 'Berhasil Dihapus', 'Rekap data berkas telah dihapus.'), 300);
             } catch (err) {
                 console.error("Gagal menghapus:", err);
                 hideDeleteModal();
@@ -1413,7 +1107,6 @@
 
         function openAdminDashboard() {
             renderTable();
-            switchTab('rekap');
             document.body.style.overflow = 'hidden'; 
             adminDashboard.classList.remove('hidden');
         }
