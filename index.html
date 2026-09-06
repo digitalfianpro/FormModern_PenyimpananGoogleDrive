@@ -627,18 +627,7 @@
             }
         ];
 
-        // Tampilkan data langsung secara instan tanpa menunggu jaringan
-        function renderImmediateLocalData() {
-            listKampungState = defaultKampungList.map((nama, idx) => ({ id: 'def_' + idx, nama }));
-            daftarKategoriState = defaultDaftarKategori;
-            renderKampungDropdown();
-            renderKategoriUI();
-        }
-
         async function initAuthAndDataSync() {
-            // Render cepat terlebih dahulu
-            renderImmediateLocalData();
-
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     const userCred = await signInWithCustomToken(auth, __initial_auth_token);
@@ -675,12 +664,11 @@
 
             // 1. Sync Kampung Data
             const kampungCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kampung');
-            onSnapshot(kampungCol, (snapshot) => {
+            onSnapshot(kampungCol, async (snapshot) => {
                 if (snapshot.empty) {
-                    // Masukkan data awal di background tanpa memblokir UI
-                    defaultKampungList.forEach(nama => {
-                        addDoc(kampungCol, { nama: nama }).catch(console.error);
-                    });
+                    for (const nama of defaultKampungList) {
+                        await addDoc(kampungCol, { nama: nama });
+                    }
                     return;
                 }
                 
@@ -696,12 +684,11 @@
 
             // 2. Sync Kategori Data
             const kategoriCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
-            onSnapshot(kategoriCol, (snapshot) => {
+            onSnapshot(kategoriCol, async (snapshot) => {
                 if (snapshot.empty) {
-                    // Masukkan data awal di background
-                    defaultDaftarKategori.forEach(kat => {
-                        addDoc(kategoriCol, kat).catch(console.error);
-                    });
+                    for (const kat of defaultDaftarKategori) {
+                        await addDoc(kategoriCol, kat);
+                    }
                     return;
                 }
 
@@ -884,9 +871,6 @@
                         document.getElementById(`btn_remove_${sub.id}`)?.addEventListener('click', () => {
                             removeKategoriFile(sub.id);
                         });
-                        
-                        // Pulihkan state UI jika file sudah pernah dipilih
-                        restoreFileSelectionUI(sub.id);
                     });
 
                 } else {
@@ -933,30 +917,8 @@
                     document.getElementById(`btn_remove_${kat.id}`)?.addEventListener('click', () => {
                         removeKategoriFile(kat.id);
                     });
-
-                    // Pulihkan state UI jika file sudah pernah dipilih
-                    restoreFileSelectionUI(kat.id);
                 }
             });
-        }
-
-        function restoreFileSelectionUI(id) {
-            const fileData = uploadedFiles[id];
-            if (!fileData || !fileData.files || fileData.files.length === 0) return;
-
-            const statusEl = document.getElementById(`status_${id}`);
-            const removeBtn = document.getElementById(`btn_remove_${id}`);
-            const boxEl = document.getElementById(`box_${id}`);
-
-            const totalSize = fileData.files.reduce((acc, f) => acc + f.size, 0);
-            const sizeStr = (totalSize / (1024 * 1024)).toFixed(2);
-
-            if (statusEl) {
-                statusEl.textContent = `${fileData.files.length} file terpilih (${sizeStr} MB)`;
-                statusEl.className = 'text-[11px] font-bold text-emerald-600 truncate mt-0.5';
-            }
-            if (removeBtn) removeBtn.classList.remove('hidden');
-            if (boxEl) boxEl.classList.add('border-emerald-300', 'bg-emerald-50/20');
         }
 
         function handleKategoriFile(id, namaKategori, driveId) {
