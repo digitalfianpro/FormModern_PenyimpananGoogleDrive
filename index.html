@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FormModern - Portal Pengumpulan Data & Berkas Resmi Distrik Sidey</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
     
     <!-- Mengimpor font Inter & Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -93,20 +98,12 @@
             50% { transform: translateY(-3px) scale(1.02); }
         }
 
-        /* Animasi Efek Mewah untuk Logo */
         @keyframes floatLogo {
             0%, 100% { transform: translateY(0px) scale(1); }
             50% { transform: translateY(-8px) scale(1.02); }
         }
         .animate-floating-logo {
             animation: floatLogo 4s ease-in-out infinite;
-        }
-        
-        @keyframes spinSlow {
-            100% { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-            animation: spinSlow 10s linear infinite;
         }
         
         @keyframes sweepLight {
@@ -182,32 +179,25 @@
 
     <div class="w-full max-w-lg sm:max-w-xl bg-white rounded-2xl sm:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.35)] overflow-hidden animate-slide-up relative z-10 my-auto">
         
-        <!-- Aksen garis gradasi -->
         <div class="h-1.5 sm:h-2 w-full bg-gradient-to-r from-cyan-400 via-brand-500 to-blue-600"></div>
         
         <div class="p-4 sm:p-7 lg:p-8 relative">
 
-            <!-- Header Form Mewah & Modern -->
+            <!-- Header Form -->
             <div class="text-center mb-6 sm:mb-7 relative">
-                <!-- Emblem Logo Gold/Emerald Luxe Glow -->
                 <div class="relative inline-flex items-center justify-center mb-6 group cursor-default animate-floating-logo">
-                    <!-- Bingkai Wadah Logo -->
                     <div class="relative w-28 h-28 sm:w-36 sm:h-36 bg-transparent flex items-center justify-center z-10">
-                        <!-- Efek kilapan cahaya melintas (sweep light) pada kaca logo -->
                         <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent z-20 pointer-events-none animate-sweep-light mix-blend-overlay"></div>
                         
                         <img src="https://i.ibb.co.com/v6JjxL8q/Chat-GPT-Image-27-Jul-2026-11-40-44.png" alt="Logo Distrik Sidey" class="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_15px_30px_rgba(16,185,129,0.25)] group-hover:scale-110 transition-all duration-700 ease-out relative z-10" onerror="this.src='https://placehold.co/144x144/ffffff/fbbf24?text=Logo'">
                     </div>
                 </div>
 
-                <!-- Judul Utama -->
                 <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
                     Form<span class="bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent">Modern</span>
                 </h1>
 
-                <!-- Subtitle Sub-Header Mewah & Modern -->
                 <div class="mt-2.5 flex flex-col items-center justify-center gap-1.5">
-                    <!-- Badge Distrik Sidey Bergerak & Mewah (Tanpa Mahkota) -->
                     <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full animated-sidey-badge shadow-lg shadow-amber-500/10 cursor-default my-1">
                         <span class="relative flex h-2.5 w-2.5">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -218,7 +208,6 @@
                         </span>
                     </div>
 
-                    <!-- Teks Subtitle dengan Tampilan Mewah & Modern -->
                     <p class="text-xs sm:text-sm font-semibold tracking-wide text-slate-600 max-w-md mx-auto leading-relaxed pt-0.5">
                         <span class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-800 bg-clip-text text-transparent font-extrabold border-b border-brand-200 pb-0.5">
                             Portal Pengumpulan Data & Berkas Resmi
@@ -252,18 +241,6 @@
                         <select id="namaKampung" name="namaKampung" required
                             class="block w-full pl-10 pr-10 py-2.5 sm:py-3 border border-slate-300 rounded-xl text-slate-900 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all text-xs sm:text-sm font-medium appearance-none cursor-pointer">
                             <option value="" disabled selected>-- Pilih Nama Kampung --</option>
-                            <option value="Kaironi">Kaironi</option>
-                            <option value="Kasi">Kasi</option>
-                            <option value="Manggupi">Manggupi</option>
-                            <option value="Meyof 1">Meyof 1</option>
-                            <option value="Saray">Saray</option>
-                            <option value="Sidey">Sidey</option>
-                            <option value="Sidey Baru">Sidey Baru</option>
-                            <option value="Sidey Jaya">Sidey Jaya</option>
-                            <option value="Sidey Makmur">Sidey Makmur</option>
-                            <option value="Waramui">Waramui</option>
-                            <option value="Wariki">Wariki</option>
-                            <option value="Womnowi">Womnowi</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
                             <i class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
@@ -281,7 +258,7 @@
                     <p class="text-[11px] sm:text-xs text-slate-500 mb-3">Pilih satu atau beberapa kategori file (Foto/PDF/Doc). Sistem akan mengompres foto secara otomatis agar pengiriman super cepat!</p>
                     
                     <div class="space-y-2.5 sm:space-y-3" id="kategoriContainer">
-                        <!-- List Kategori akan dimuat oleh JS secara rapi -->
+                        <!-- List Kategori dimuat via JS -->
                     </div>
                 </div>
 
@@ -326,7 +303,7 @@
                     <i class="fa-solid fa-user-shield text-xl"></i>
                 </div>
                 <h3 class="text-base sm:text-lg font-bold text-slate-900">Akses Admin</h3>
-                <p class="text-xs text-slate-500 mt-0.5">Masukkan kata sandi untuk melihat rekap data.</p>
+                <p class="text-xs text-slate-500 mt-0.5">Masukkan kata sandi untuk mengelola data & folder.</p>
             </div>
             <input type="password" id="adminPassword" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl mb-4 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-center tracking-[0.25em] font-bold text-slate-800 text-sm" placeholder="••••••••">
             <div class="flex gap-2.5">
@@ -343,8 +320,8 @@
             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 mb-3">
                 <i class="fa-solid fa-trash-can text-xl"></i>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" id="deleteModalTitle">Hapus Data Berkas?</h3>
-            <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data berkas ini?</p>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" id="deleteModalTitle">Hapus Data?</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data ini?</p>
             <div class="flex gap-2.5">
                 <button type="button" id="cancelDeleteBtn" class="w-1/2 rounded-xl border border-slate-300 px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Batal</button>
                 <button type="button" id="confirmDeleteBtn" class="w-1/2 rounded-xl bg-red-600 px-3 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-red-700 active:scale-95 transition-all shadow-md flex items-center justify-center">
@@ -355,7 +332,36 @@
         </div>
     </div>
 
-    <!-- Dashboard Admin & Pengelolaan Data/Kampung/Kategori -->
+    <!-- Modal Tambah Sub Folder Baru -->
+    <div id="addSubFolderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity opacity-0" id="addSubFolderBackdrop"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md transform scale-95 opacity-0 transition-all duration-300 relative z-10 p-5 sm:p-6" id="addSubFolderContent">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-brand-600"></i> Tambah Sub-Folder Baru
+                </h3>
+                <button id="closeSubFolderModalBtn" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="addSubFolderForm" class="space-y-3">
+                <input type="hidden" id="targetParentCatDocId">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Sub-Folder / Sub-Kategori <span class="text-red-500">*</span></label>
+                    <input type="text" id="newSubFolderName" required placeholder="Contoh: Alokasi Dana Desa 2026" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Link / ID Drive Sub-Folder <span class="text-red-500">*</span></label>
+                    <input type="text" id="newSubFolderDrive" required placeholder="https://drive.google.com/drive/folders/ID_SUB_FOLDER" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                </div>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" id="cancelSubFolderBtn" class="w-1/2 py-2.5 border border-slate-300 rounded-xl font-bold text-xs sm:text-sm text-slate-700 hover:bg-slate-50 transition-colors">Batal</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-brand-600 text-white rounded-xl font-bold text-xs sm:text-sm hover:bg-brand-700 transition-all shadow-md active:scale-95 flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-check"></i> Simpan Sub-Folder
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div id="adminDashboard" class="fixed inset-0 z-40 hidden bg-slate-50 overflow-y-auto">
         <div class="min-h-screen p-3 sm:p-6 lg:p-8 pb-24">
             <div class="max-w-7xl mx-auto space-y-6">
@@ -391,8 +397,8 @@
                     </button>
                 </div>
 
+                <!-- Tab 1: Rekap Berkas -->
                 <div id="sectionRekap" class="space-y-4">
-                    <!-- Search / Filter Input -->
                     <div class="no-print hide-in-preview">
                         <div class="relative">
                             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
@@ -400,14 +406,12 @@
                         </div>
                     </div>
 
-                    <!-- Floating Exit Preview Button -->
                     <div id="exitPreviewContainer" class="hidden fixed top-4 right-4 z-50 no-print animate-slide-up">
                         <button id="exitPreviewBtn" class="px-4 py-2 bg-slate-900 text-white rounded-xl shadow-2xl font-bold text-xs sm:text-sm flex items-center gap-2 hover:bg-slate-800 transition-all border border-slate-700">
                             <i class="fa-solid fa-arrow-left"></i> Keluar Pratinjau
                         </button>
                     </div>
 
-                    <!-- Tabel Area -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-area" id="printableArea">
                         <div class="p-4 sm:p-6 border-b border-slate-100 hidden print:block">
                             <h1 class="text-xl font-bold text-center text-slate-900">Laporan Pengumpulan Berkas FormModern - Distrik Sidey</h1>
@@ -427,7 +431,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="dataTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm">
-                                    <!-- Data tabel diinject via JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -442,6 +445,7 @@
                     </div>
                 </div>
 
+                <!-- Tab 2: Kelola Kampung -->
                 <div id="sectionKampung" class="hidden space-y-4">
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
@@ -461,15 +465,15 @@
                             <i class="fa-solid fa-list-check text-slate-700"></i> Daftar Nama Kampung
                         </h3>
                         <div id="kampungListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-                            <!-- List Kampung diinject via JS -->
                         </div>
                     </div>
                 </div>
 
+                <!-- Tab 3: Kelola Kategori -->
                 <div id="sectionKategori" class="hidden space-y-4">
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-folder-plus text-emerald-600"></i> Tambah Kategori Berkas Baru
+                            <i class="fa-solid fa-folder-plus text-emerald-600"></i> Tambah Kategori Berkas Utama
                         </h3>
                         <p class="text-xs text-slate-500 mb-4">Masukkan nama kategori dan ID atau Link Folder Google Drive tempat menyimpan berkas.</p>
                         <form id="addKategoriForm" class="space-y-3">
@@ -491,10 +495,9 @@
 
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-folder-open text-amber-500"></i> Daftar Kategori Berkas Aktif
+                            <i class="fa-solid fa-folder-open text-amber-500"></i> Daftar Kategori & Sub-Folder Aktif
                         </h3>
-                        <div id="kategoriAdminListContainer" class="space-y-2.5">
-                            <!-- List Kategori Admin diinject via JS -->
+                        <div id="kategoriAdminListContainer" class="space-y-3">
                         </div>
                     </div>
                 </div>
@@ -513,9 +516,8 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
             ? JSON.parse(__firebase_config) 
             : {
@@ -535,15 +537,17 @@
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'formmodern';
         let currentUser = null;
 
-        // DOM Elements
+        // URL Google Apps Script Web App
+        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRGaYbsCVw7wk_3vfFy4SdDKr7XYr4H9OFWucmStCCyuuQA-fmtAD0D0sXBqKdzD3A/exec";
+
+        // Global DOM References
         const form = document.getElementById('modernForm');
         const kategoriContainer = document.getElementById('kategoriContainer');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnLoading = document.getElementById('btnLoading');
         const btnLoadingText = document.getElementById('btnLoadingText');
-        
-        // Modal Elements
+
         const modal = document.getElementById('customModal');
         const modalBackdrop = document.getElementById('modalBackdrop');
         const modalContent = document.getElementById('modalContent');
@@ -552,16 +556,59 @@
         const modalMessage = document.getElementById('modalMessage');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordBackdrop = document.getElementById('passwordBackdrop');
+        const passwordContent = document.getElementById('passwordContent');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+        const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+        const adminBtn = document.getElementById('adminBtn');
+
+        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+        const deleteConfirmBackdrop = document.getElementById('deleteConfirmBackdrop');
+        const deleteConfirmContent = document.getElementById('deleteConfirmContent');
+        const deleteModalTitle = document.getElementById('deleteModalTitle');
+        const deleteConfirmMessage = document.getElementById('deleteConfirmMessage');
+        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const btnDeleteText = document.getElementById('btnDeleteText');
+        const btnDeleteLoading = document.getElementById('btnDeleteLoading');
+
+        const addSubFolderModal = document.getElementById('addSubFolderModal');
+        const addSubFolderBackdrop = document.getElementById('addSubFolderBackdrop');
+        const addSubFolderContent = document.getElementById('addSubFolderContent');
+        const addSubFolderForm = document.getElementById('addSubFolderForm');
+        const targetParentCatDocIdInput = document.getElementById('targetParentCatDocId');
+        const closeSubFolderModalBtn = document.getElementById('closeSubFolderModalBtn');
+        const cancelSubFolderBtn = document.getElementById('cancelSubFolderBtn');
+
+        const adminDashboard = document.getElementById('adminDashboard');
+        const backToFormBtn = document.getElementById('backToFormBtn');
+        const floatingBackToFormBtn = document.getElementById('floatingBackToFormBtn');
+        const printDataBtn = document.getElementById('printDataBtn');
+        const previewDataBtn = document.getElementById('previewDataBtn');
+        const exitPreviewBtn = document.getElementById('exitPreviewBtn');
+        const exitPreviewContainer = document.getElementById('exitPreviewContainer');
+
+        const tabRekapBtn = document.getElementById('tabRekapBtn');
+        const tabKampungBtn = document.getElementById('tabKampungBtn');
+        const tabKategoriBtn = document.getElementById('tabKategoriBtn');
+        const sectionRekap = document.getElementById('sectionRekap');
+        const sectionKampung = document.getElementById('sectionKampung');
+        const sectionKategori = document.getElementById('sectionKategori');
+
+        const addKampungForm = document.getElementById('addKampungForm');
+        const addKategoriForm = document.getElementById('addKategoriForm');
+        const adminSearchInput = document.getElementById('adminSearchInput');
+
         let submissionsData = [];
 
-        // Data Bawaan Nama Kampung
         const defaultKampungList = [
             "Kaironi", "Kasi", "Manggupi", "Meyof 1", "Saray", 
             "Sidey", "Sidey Baru", "Sidey Jaya", "Sidey Makmur", 
             "Waramui", "Wariki", "Womnowi"
         ];
 
-        // Data Bawaan Kategori
         const defaultDaftarKategori = [
             { id: 'kat1', nama: 'Data Nominatif Kampung', driveId: '1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs', driveLink: 'https://drive.google.com/drive/folders/1wF2D35uwpuhAmLqtOcDQ4bkDj5wA5EMs?usp=drive_link' },
             { id: 'kat2', nama: 'Data Perangkat Bamuskam', driveId: '1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm', driveLink: 'https://drive.google.com/drive/folders/1zDTdaWRCVdaH4Z6zu-8e29kaROn8HTSm?usp=drive_link' },
@@ -579,14 +626,15 @@
             }
         ];
 
-        let listKampungState = [];
-        let daftarKategoriState = [];
+        let listKampungState = defaultKampungList.map((nama, idx) => ({ id: 'def_' + idx, nama: nama }));
+        let daftarKategoriState = defaultDaftarKategori.map(k => ({ docId: k.id, ...k }));
+        let uploadedFiles = {}; // Maps categoryId -> Array of File objects
 
-        // URL Web App Google Apps Script
-        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRGaYbsCVw7wk_3vfFy4SdDKr7XYr4H9OFWucmStCCyuuQA-fmtAD0D0sXBqKdzD3A/exec"; 
+        let deleteType = null; // 'submission' | 'kampung' | 'kategori' | 'subcategory'
+        let itemToDeleteId = null;
 
-        let uploadedFiles = {}; 
-        const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
+        renderKampungDropdown();
+        renderKategoriUI();
 
         async function initAuthAndDataSync() {
             try {
@@ -601,7 +649,7 @@
                 setupRealtimeSubmissions();
                 setupRealtimeMasterData();
             } catch (err) {
-                console.error("Autentikasi gagal:", err);
+                console.warn("Autentikasi offline/lambat, menggunakan UI lokal instan:", err);
             }
         }
 
@@ -614,9 +662,7 @@
                     submissionsData.push({ id: doc.id, ...doc.data() });
                 });
                 submissionsData.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                if (typeof renderTable === 'function') {
-                    renderTable();
-                }
+                renderTable();
             }, (error) => {
                 console.error("Gagal mendengarkan data Firestore:", error);
             });
@@ -629,7 +675,6 @@
             const kampungCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kampung');
             onSnapshot(kampungCol, async (snapshot) => {
                 if (snapshot.empty) {
-                    // Seed default data jika kosong
                     for (const nama of defaultKampungList) {
                         await addDoc(kampungCol, { nama: nama });
                     }
@@ -650,7 +695,6 @@
             const kategoriCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
             onSnapshot(kategoriCol, async (snapshot) => {
                 if (snapshot.empty) {
-                    // Seed default data jika kosong
                     for (const kat of defaultDaftarKategori) {
                         await addDoc(kategoriCol, kat);
                     }
@@ -693,10 +737,13 @@
                 card.className = 'p-3 rounded-xl border border-slate-200 bg-slate-50/80 flex items-center justify-between text-xs font-bold text-slate-800';
                 card.innerHTML = `
                     <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-500"></i> ${item.nama}</span>
-                    <button type="button" onclick="askDeleteKampung('${item.id}', '${(item.nama || '').replace(/'/g, "\\'")}')" class="text-red-600 hover:bg-red-100 p-1.5 rounded-lg border border-red-200 transition-all active:scale-95" title="Hapus Kampung">
+                    <button type="button" class="btn-delete-kampung text-red-600 hover:bg-red-100 p-1.5 rounded-lg border border-red-200 transition-all active:scale-95" title="Hapus Kampung">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 `;
+                card.querySelector('.btn-delete-kampung').addEventListener('click', () => {
+                    askDeleteKampung(item.id, item.nama);
+                });
                 container.appendChild(card);
             });
         }
@@ -708,143 +755,90 @@
             container.innerHTML = '';
             daftarKategoriState.forEach(kat => {
                 const card = document.createElement('div');
-                card.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs';
+                card.className = 'p-4 rounded-2xl border border-slate-200 bg-slate-50/90 space-y-3';
                 
                 let linkHtml = kat.driveLink 
-                    ? `<a href="${kat.driveLink}" target="_blank" class="text-emerald-700 font-bold hover:underline inline-flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka Folder Drive</a>`
-                    : `<span class="text-slate-400 block mt-0.5">ID Drive: ${kat.driveId || '-'}</span>`;
+                    ? `<a href="${kat.driveLink}" target="_blank" class="text-emerald-700 font-bold hover:underline inline-flex items-center text-xs"><i class="fa-brands fa-google-drive mr-1"></i> Buka Folder Utama Drive</a>`
+                    : `<span class="text-slate-400 text-xs">ID Drive: ${kat.driveId || '-'}</span>`;
+
+                let subFoldersHtml = '';
+                if (kat.subCategories && Array.isArray(kat.subCategories) && kat.subCategories.length > 0) {
+                    subFoldersHtml = '<div class="space-y-1.5 pl-3 border-l-2 border-brand-300 mt-2">';
+                    kat.subCategories.forEach((sub) => {
+                        subFoldersHtml += `
+                            <div class="p-2 rounded-xl bg-white border border-slate-200 flex items-center justify-between gap-2 text-xs">
+                                <div class="min-w-0">
+                                    <span class="font-bold text-slate-800 flex items-center gap-1.5 truncate">
+                                        <i class="fa-solid fa-folder-tree text-indigo-500"></i> ${sub.nama}
+                                    </span>
+                                    <a href="${sub.driveLink || '#'}" target="_blank" class="text-[10px] text-emerald-700 font-bold hover:underline inline-flex items-center mt-0.5">
+                                        <i class="fa-brands fa-google-drive mr-1"></i> Drive Sub-Folder
+                                    </a>
+                                </div>
+                                <button type="button" class="btn-delete-sub px-2 py-1 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 border border-red-200 text-[11px] font-bold active:scale-95 transition-all shrink-0">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        `;
+                    });
+                    subFoldersHtml += '</div>';
+                }
 
                 card.innerHTML = `
-                    <div>
-                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2"><i class="fa-solid fa-folder text-amber-500"></i> ${kat.nama}</h4>
-                        ${linkHtml}
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2"><i class="fa-solid fa-folder text-amber-500 text-base"></i> ${kat.nama}</h4>
+                            ${linkHtml}
+                        </div>
+                        <div class="flex items-center gap-1.5 self-end sm:self-center">
+                            <button type="button" class="btn-add-sub px-3 py-1.5 bg-brand-50 text-brand-700 font-bold rounded-xl border border-brand-200 hover:bg-brand-100 active:scale-95 transition-all text-xs flex items-center gap-1 shadow-2xs">
+                                <i class="fa-solid fa-folder-plus text-brand-600"></i> + Sub-Folder
+                            </button>
+                            <button type="button" class="btn-delete-kat px-3 py-1.5 bg-red-50 text-red-600 font-bold rounded-xl border border-red-200 hover:bg-red-100 active:scale-95 transition-all text-xs flex items-center gap-1 shadow-2xs">
+                                <i class="fa-solid fa-trash-can"></i> Hapus
+                            </button>
+                        </div>
                     </div>
-                    <button type="button" onclick="askDeleteKategori('${kat.docId}', '${(kat.nama || '').replace(/'/g, "\\'")}')" class="self-end sm:self-center px-3 py-1.5 bg-red-50 text-red-600 font-bold rounded-lg border border-red-200 hover:bg-red-100 active:scale-95 transition-all flex items-center gap-1">
-                        <i class="fa-solid fa-trash-can"></i> Hapus Kategori
-                    </button>
+                    ${subFoldersHtml}
                 `;
+
+                card.querySelector('.btn-add-sub').addEventListener('click', () => openAddSubFolderModal(kat.docId));
+                card.querySelector('.btn-delete-kat').addEventListener('click', () => askDeleteKategori(kat.docId, kat.nama));
+
+                const subDeleteBtns = card.querySelectorAll('.btn-delete-sub');
+                if (kat.subCategories && Array.isArray(kat.subCategories)) {
+                    subDeleteBtns.forEach((btn, index) => {
+                        const sub = kat.subCategories[index];
+                        if (sub) {
+                            btn.addEventListener('click', () => askDeleteSubCategory(kat.docId, sub.id, sub.nama));
+                        }
+                    });
+                }
+
                 container.appendChild(card);
             });
         }
 
-        async function compressImageIfNeeded(file) {
-            if (!file.type.startsWith('image/')) {
-                return file;
-            }
-
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        const maxDim = 1600;
-
-                        if (width > maxDim || height > maxDim) {
-                            if (width > height) {
-                                height = Math.round((height * maxDim) / width);
-                                width = maxDim;
-                            } else {
-                                width = Math.round((width * maxDim) / height);
-                                height = maxDim;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        canvas.toBlob((blob) => {
-                            if (!blob) {
-                                resolve(file);
-                                return;
-                            }
-                            const compressedFile = new File([blob], file.name, {
-                                type: 'image/jpeg',
-                                lastModified: Date.now()
-                            });
-                            resolve(compressedFile);
-                        }, 'image/jpeg', 0.82);
-                    };
-                    img.onerror = () => resolve(file);
-                };
-                reader.onerror = () => resolve(file);
-            });
-        }
-
-        function readFileAsBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function formatBytes(bytes, decimals = 1) {
-            if (bytes === 0) return '0 B';
-            const k = 1024;
-            const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['B', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-        }
-
-        // Modal Helpers
-        function showModal(type, title, message) {
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            
-            if (type === 'error') {
-                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-red-100 text-red-600 mb-3';
-                modalIconContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-2xl sm:text-3xl"></i>';
-                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-red-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-red-700 transition-colors';
-            } else if (type === 'success') {
-                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-emerald-100 text-emerald-600 mb-3';
-                modalIconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-2xl sm:text-3xl"></i>';
-                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl border border-transparent bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-emerald-700 transition-colors';
-            }
-
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modalBackdrop.classList.remove('opacity-0');
-                modalContent.classList.remove('opacity-0', 'scale-95');
-                modalContent.classList.add('opacity-100', 'scale-100');
-            }, 10);
-        }
-
-        function hideModal() {
-            modalBackdrop.classList.add('opacity-0');
-            modalContent.classList.remove('opacity-100', 'scale-100');
-            modalContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 250);
-        }
-
-        closeModalBtn.addEventListener('click', hideModal);
-
         function renderKategoriUI() {
+            if (!kategoriContainer) return;
             kategoriContainer.innerHTML = '';
             const activeKategori = daftarKategoriState.length > 0 ? daftarKategoriState : defaultDaftarKategori;
 
             activeKategori.forEach((kat, index) => {
                 const no = index + 1;
 
-                if (kat.isLPJ) {
-                    let subHtml = kat.subCategories.map((sub, sIdx) => `
+                if (kat.subCategories && Array.isArray(kat.subCategories) && kat.subCategories.length > 0) {
+                    let subHtml = kat.subCategories.map((sub) => `
                         <div id="box_${sub.id}" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div class="min-w-0">
                                 <span class="font-bold text-xs text-indigo-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-folder-open text-indigo-500 text-xs"></i> LPJ ${sub.nama}
+                                    <i class="fa-solid fa-folder-open text-indigo-500 text-xs"></i> ${sub.nama}
                                 </span>
                                 <p class="text-[11px] text-slate-400 truncate mt-0.5" id="status_${sub.id}">Belum ada file terpilih</p>
+                                ${sub.driveLink ? `
                                 <a href="${sub.driveLink}" target="_blank" class="inline-flex items-center text-[10px] font-bold text-emerald-700 hover:underline mt-0.5">
                                     <i class="fa-brands fa-google-drive mr-1"></i> Folder Drive
-                                </a>
+                                </a>` : ''}
                             </div>
 
                             <div class="shrink-0 flex items-center gap-1.5 self-end sm:self-center">
@@ -865,7 +859,7 @@
                                 <div class="mt-0.5 shrink-0 w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center text-[11px] font-extrabold text-indigo-600 border border-indigo-100">${no}</div>
                                 <div>
                                     <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">${kat.nama}</h4>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">Unggah berkas Alokasi Dana Desa & Pelaporan Dana Desa di bawah ini:</p>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Pilih dan unggah berkas pada sub-folder yang tersedia di bawah ini:</p>
                                 </div>
                             </div>
                             <div class="space-y-2 mt-1">
@@ -936,260 +930,220 @@
             });
         }
 
-        function removeKategoriFile(id) {
-            delete uploadedFiles[id];
-
+        function handleKategoriFile(id, namaKategori, driveId) {
             const input = document.getElementById(`input_${id}`);
-            const status = document.getElementById(`status_${id}`);
-            const btnUpload = document.getElementById(`btn_upload_${id}`);
-            const btnRemove = document.getElementById(`btn_remove_${id}`);
-            const box = document.getElementById(`box_${id}`);
+            const statusEl = document.getElementById(`status_${id}`);
+            const removeBtn = document.getElementById(`btn_remove_${id}`);
+            const boxEl = document.getElementById(`box_${id}`);
 
-            if (input) input.value = '';
-            if (status) status.innerHTML = 'Belum ada file terpilih';
-            if (btnUpload) btnUpload.classList.remove('hidden');
-            if (btnRemove) btnRemove.classList.add('hidden');
-            if (box) box.classList.remove('border-emerald-300', 'bg-emerald-50/20');
+            if (input && input.files && input.files.length > 0) {
+                const files = Array.from(input.files);
+                uploadedFiles[id] = {
+                    kategoriId: id,
+                    kategoriNama: namaKategori,
+                    driveId: driveId || '1oVvE8bqbzBJcaEyRHpKi_AiTs3cHgw4Y',
+                    files: files
+                };
+
+                const totalSize = files.reduce((acc, f) => acc + f.size, 0);
+                const sizeStr = (totalSize / (1024 * 1024)).toFixed(2);
+
+                if (statusEl) {
+                    statusEl.textContent = `${files.length} file terpilih (${sizeStr} MB)`;
+                    statusEl.className = 'text-[11px] font-bold text-emerald-600 truncate mt-0.5';
+                }
+                if (removeBtn) removeBtn.classList.remove('hidden');
+                if (boxEl) boxEl.classList.add('border-emerald-300', 'bg-emerald-50/20');
+            }
         }
 
-        function resetAllKategori() {
-            const activeKategori = daftarKategoriState.length > 0 ? daftarKategoriState : defaultDaftarKategori;
-            activeKategori.forEach(kat => {
-                if (kat.isLPJ) {
-                    kat.subCategories.forEach(sub => removeKategoriFile(sub.id));
-                } else {
-                    removeKategoriFile(kat.id);
+        function removeKategoriFile(id) {
+            delete uploadedFiles[id];
+            const input = document.getElementById(`input_${id}`);
+            const statusEl = document.getElementById(`status_${id}`);
+            const removeBtn = document.getElementById(`btn_remove_${id}`);
+            const boxEl = document.getElementById(`box_${id}`);
+
+            if (input) input.value = '';
+            if (statusEl) {
+                statusEl.textContent = 'Belum ada file terpilih';
+                statusEl.className = 'text-[11px] text-slate-400 truncate mt-0.5';
+            }
+            if (removeBtn) removeBtn.classList.add('hidden');
+            if (boxEl) boxEl.classList.remove('border-emerald-300', 'bg-emerald-50/20');
+        }
+
+        function compressImage(file) {
+            return new Promise((resolve) => {
+                if (!file.type.startsWith('image/')) {
+                    resolve(file);
+                    return;
                 }
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxWidth = 1600;
+
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        canvas.toBlob((blob) => {
+                            if (blob) {
+                                const compressedFile = new File([blob], file.name, {
+                                    type: 'image/jpeg',
+                                    lastModified: Date.now()
+                                });
+                                resolve(compressedFile);
+                            } else {
+                                resolve(file);
+                            }
+                        }, 'image/jpeg', 0.8);
+                    };
+                    img.onerror = () => resolve(file);
+                };
+                reader.onerror = () => resolve(file);
             });
         }
 
-        function handleKategoriFile(id, namaKategori, targetDriveId) {
-            const input = document.getElementById(`input_${id}`);
-            const status = document.getElementById(`status_${id}`);
-            const btnUpload = document.getElementById(`btn_upload_${id}`);
-            const btnRemove = document.getElementById(`btn_remove_${id}`);
-            const box = document.getElementById(`box_${id}`);
-            const files = input.files;
-            
-            if (files && files.length > 0) {
-                uploadedFiles[id] = [];
-                let totalSize = 0;
-                let oversizeCount = 0;
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64String = reader.result.split(',')[1];
+                    resolve(base64String);
+                };
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
 
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    if (file.size > MAX_FILE_SIZE) {
-                        oversizeCount++;
-                        continue;
-                    }
-                    totalSize += file.size;
-                    uploadedFiles[id].push({
-                        fileObj: file,
-                        driveId: targetDriveId,
-                        kategori: namaKategori,
-                        fileName: file.name,
-                        size: formatBytes(file.size)
-                    });
-                }
+        async function uploadSingleFileToDrive(fileObj, kampungName, folderId) {
+            const compressed = await compressImage(fileObj);
+            const base64Data = await fileToBase64(compressed);
 
-                if (oversizeCount > 0) {
-                    showModal('error', 'File Terlalu Besar', `${oversizeCount} file diabaikan karena melebihi batas 20 MB per file.`);
-                }
+            const payload = {
+                folderId: folderId || '1oVvE8bqbzBJcaEyRHpKi_AiTs3cHgw4Y',
+                fileName: compressed.name,
+                mimeType: compressed.type || 'application/octet-stream',
+                base64: base64Data,
+                kampung: kampungName
+            };
 
-                if (uploadedFiles[id].length > 0) {
-                    if (uploadedFiles[id].length === 1) {
-                        status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${uploadedFiles[id][0].fileName}</span> <span class="text-slate-400">(${formatBytes(totalSize)})</span>`;
-                    } else {
-                        status.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> ${uploadedFiles[id].length} File Terpilih</span> <span class="text-slate-400">(Total: ${formatBytes(totalSize)})</span>`;
-                    }
-                    btnUpload.classList.add('hidden');
-                    btnRemove.classList.remove('hidden');
-                    if (box) box.classList.add('border-emerald-300', 'bg-emerald-50/20');
-                } else {
-                    input.value = '';
-                    removeKategoriFile(id);
-                }
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            if (result.status === 'success') {
+                return {
+                    name: compressed.name,
+                    url: result.fileUrl,
+                    id: result.fileId,
+                    folderTarget: result.folderTarget
+                };
+            } else {
+                throw new Error(result.message || 'Gagal mengunggah ke Google Drive');
             }
         }
 
-        form.addEventListener('submit', async function(e) {
+        form?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const selectedKeys = Object.keys(uploadedFiles);
-            if (selectedKeys.length === 0) {
-                showModal('error', 'Berkas Belum Dipilih', 'Silakan unggah minimal 1 berkas pada kategori di atas sebelum mengirim.');
+
+            const namaLengkap = document.getElementById('namaLengkap').value.trim();
+            const namaKampung = document.getElementById('namaKampung').value;
+
+            if (!namaLengkap || !namaKampung) {
+                showModal('error', 'Form Tidak Lengkap', 'Silakan isi Nama Lengkap dan pilih Nama Kampung.');
                 return;
             }
 
-            let allSelectedItems = [];
-            for (const key of selectedKeys) {
-                if (Array.isArray(uploadedFiles[key])) {
-                    allSelectedItems.push(...uploadedFiles[key]);
-                } else if (uploadedFiles[key]) {
-                    allSelectedItems.push(uploadedFiles[key]);
-                }
-            }
-
-            if (allSelectedItems.length === 0) {
-                showModal('error', 'Berkas Valid Tidak Ditemukan', 'Tidak ada berkas valid yang siap dikirim.');
-                return;
-            }
-
-            if (!currentUser) {
-                showModal('error', 'Koneksi Terputus', 'Sedang menghubungkan ke server. Silakan coba sebentar lagi.');
+            const activeKeys = Object.keys(uploadedFiles);
+            if (activeKeys.length === 0) {
+                showModal('error', 'Berkas Kosong', 'Pilihlah minimal 1 berkas lampiran untuk diunggah.');
                 return;
             }
 
             submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
             btnText.classList.add('hidden');
             btnLoading.classList.remove('hidden');
-            btnLoading.classList.add('flex');
+            btnLoadingText.textContent = 'Memulai pengunggahan...';
 
             try {
-                const dateObj = new Date();
-                const timeString = dateObj.toLocaleDateString('id-ID') + ' ' + dateObj.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
-                const selectedKampung = document.getElementById('namaKampung').value;
+                let totalFilesToUpload = 0;
+                activeKeys.forEach(k => totalFilesToUpload += uploadedFiles[k].files.length);
 
-                btnLoadingText.textContent = `Mengompres & menyiapkan (${allSelectedItems.length} file)...`;
-                
-                const preparedItems = await Promise.all(allSelectedItems.map(async (itemObj) => {
-                    const processedFile = await compressImageIfNeeded(itemObj.fileObj);
-                    const base64Data = await readFileAsBase64(processedFile);
-                    return {
-                        item: itemObj,
-                        processedFile: processedFile,
-                        base64Data: base64Data
-                    };
-                }));
+                let completedCount = 0;
+                let fileRecords = [];
 
-                btnLoadingText.textContent = `Mengunggah ${allSelectedItems.length} file sekaligus...`;
+                for (const catKey of activeKeys) {
+                    const catObj = uploadedFiles[catKey];
+                    for (const fileItem of catObj.files) {
+                        completedCount++;
+                        btnLoadingText.textContent = `Mengunggah (${completedCount}/${totalFilesToUpload})...`;
 
-                const uploadPromises = preparedItems.map(async (prep) => {
-                    let fileDriveUrl = '';
-                    if (GOOGLE_APPS_SCRIPT_URL) {
-                        try {
-                            const payload = {
-                                folderId: prep.item.driveId,
-                                fileName: prep.processedFile.name,
-                                mimeType: prep.processedFile.type,
-                                base64: prep.base64Data,
-                                kampung: selectedKampung
-                            };
-
-                            const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                                method: 'POST',
-                                body: JSON.stringify(payload)
-                            });
-                            const result = await res.json();
-                            if (result.status === 'success') {
-                                fileDriveUrl = result.fileUrl;
-                            }
-                        } catch (uploadErr) {
-                            console.error("Gagal unggah berkas ke Drive:", uploadErr);
-                        }
+                        const uploadedMeta = await uploadSingleFileToDrive(fileItem, namaKampung, catObj.driveId);
+                        fileRecords.push({
+                            kategori: catObj.kategoriNama,
+                            fileName: uploadedMeta.name,
+                            fileUrl: uploadedMeta.url,
+                            driveId: uploadedMeta.id,
+                            folderTarget: uploadedMeta.folderTarget
+                        });
                     }
+                }
 
-                    return {
-                        kategori: prep.item.kategori,
-                        fileName: prep.processedFile.name,
-                        fileUrl: fileDriveUrl
-                    };
+                // Save submission record to Firestore
+                const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+                await addDoc(submissionsCol, {
+                    namaLengkap: namaLengkap,
+                    namaKampung: namaKampung,
+                    files: fileRecords,
+                    createdAt: Date.now(),
+                    waktuFormat: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
                 });
 
-                const listFileDiunggah = await Promise.all(uploadPromises);
-
-                btnLoadingText.textContent = 'Menyimpan data...';
-                const newRecord = {
-                    nama: document.getElementById('namaLengkap').value,
-                    kampung: selectedKampung,
-                    files: listFileDiunggah,
-                    waktu: timeString,
-                    createdAt: Date.now()
-                };
-
-                const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
-                await addDoc(submissionsCol, newRecord);
-
-                showModal('success', 'Data Berhasil Terkirim!', 'Data dan berkas telah berhasil tersimpan dengan cepat ke Google Drive & Cloud Database.');
-                
                 form.reset();
-                resetAllKategori();
+                uploadedFiles = {};
+                renderKategoriUI();
+
+                showModal('success', 'Berhasil Dikirim!', `Terima kasih ${namaLengkap}, ${totalFilesToUpload} berkas berhasil tersimpan otomatis di Google Drive folder kampung ${namaKampung}.`);
+
             } catch (err) {
                 console.error("Gagal mengirim data:", err);
-                showModal('error', 'Gagal Mengirim', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                showModal('error', 'Gagal Mengunggah', 'Terjadi kesalahan saat mengunggah berkas: ' + err.message);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
                 btnText.classList.remove('hidden');
                 btnLoading.classList.add('hidden');
-                btnLoading.classList.remove('flex');
             }
         });
 
-        const adminBtn = document.getElementById('adminBtn');
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordBackdrop = document.getElementById('passwordBackdrop');
-        const passwordContent = document.getElementById('passwordContent');
-        const adminPasswordInput = document.getElementById('adminPassword');
-        const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
-        const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+        adminBtn?.addEventListener('click', () => {
+            openPasswordModal();
+        });
 
-        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
-        const deleteConfirmBackdrop = document.getElementById('deleteConfirmBackdrop');
-        const deleteConfirmContent = document.getElementById('deleteConfirmContent');
-        const deleteModalTitle = document.getElementById('deleteModalTitle');
-        const deleteConfirmMessage = document.getElementById('deleteConfirmMessage');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        const btnDeleteText = document.getElementById('btnDeleteText');
-        const btnDeleteLoading = document.getElementById('btnDeleteLoading');
-
-        let itemToDeleteId = null;
-        let deleteType = 'submission'; // 'submission', 'kampung', 'kategori'
-
-        const adminDashboard = document.getElementById('adminDashboard');
-        const backToFormBtn = document.getElementById('backToFormBtn');
-        const floatingBackToFormBtn = document.getElementById('floatingBackToFormBtn');
-        const printDataBtn = document.getElementById('printDataBtn');
-        const previewDataBtn = document.getElementById('previewDataBtn');
-        const exitPreviewBtn = document.getElementById('exitPreviewBtn');
-        const exitPreviewContainer = document.getElementById('exitPreviewContainer');
-        const dataTableBody = document.getElementById('dataTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const tableElement = document.querySelector('table');
-        const adminSearchInput = document.getElementById('adminSearchInput');
-
-        // Elements Tab Admin
-        const tabRekapBtn = document.getElementById('tabRekapBtn');
-        const tabKampungBtn = document.getElementById('tabKampungBtn');
-        const tabKategoriBtn = document.getElementById('tabKategoriBtn');
-        const sectionRekap = document.getElementById('sectionRekap');
-        const sectionKampung = document.getElementById('sectionKampung');
-        const sectionKategori = document.getElementById('sectionKategori');
-
-        function switchTab(tab) {
-            tabRekapBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'rekap' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-            tabKampungBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'kampung' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-            tabKategoriBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ' + (tab === 'kategori' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100');
-
-            sectionRekap.classList.toggle('hidden', tab !== 'rekap');
-            sectionKampung.classList.toggle('hidden', tab !== 'kampung');
-            sectionKategori.classList.toggle('hidden', tab !== 'kategori');
-        }
-
-        tabRekapBtn.addEventListener('click', () => switchTab('rekap'));
-        tabKampungBtn.addEventListener('click', () => switchTab('kampung'));
-        tabKategoriBtn.addEventListener('click', () => switchTab('kategori'));
-
-        function showPasswordModal() {
-            adminPasswordInput.value = '';
+        function openPasswordModal() {
+            if (adminPasswordInput) adminPasswordInput.value = '';
             passwordModal.classList.remove('hidden');
             setTimeout(() => {
                 passwordBackdrop.classList.remove('opacity-0');
                 passwordContent.classList.remove('opacity-0', 'scale-95');
                 passwordContent.classList.add('opacity-100', 'scale-100');
-                adminPasswordInput.focus();
             }, 10);
         }
 
@@ -1200,173 +1154,240 @@
             setTimeout(() => passwordModal.classList.add('hidden'), 250);
         }
 
-        function verifyPassword() {
-            // Memeriksa password rahasia Latsar2026
-            if (adminPasswordInput.value === 'Latsar2026') {
+        cancelPasswordBtn?.addEventListener('click', hidePasswordModal);
+
+        submitPasswordBtn?.addEventListener('click', () => {
+            const pass = adminPasswordInput ? adminPasswordInput.value.trim() : '';
+            if (pass === 'Latsar2026') {
                 hidePasswordModal();
                 openAdminDashboard();
             } else {
-                hidePasswordModal();
-                setTimeout(() => showModal('error', 'Akses Ditolak', 'Kata sandi rahasia salah.'), 300);
+                showModal('error', 'Sandi Salah', 'Kata sandi rahasia admin yang Anda masukkan tidak sesuai.');
             }
-        }
-
-        adminBtn.addEventListener('click', showPasswordModal);
-        cancelPasswordBtn.addEventListener('click', hidePasswordModal);
-        submitPasswordBtn.addEventListener('click', verifyPassword);
-        adminPasswordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') verifyPassword();
         });
 
-        // Search Filter Event
-        if (adminSearchInput) {
-            adminSearchInput.addEventListener('input', renderTable);
+        function openAdminDashboard() {
+            renderTable();
+            switchTab('rekap');
+            document.body.style.overflow = 'hidden'; 
+            adminDashboard.classList.remove('hidden');
         }
 
-        function renderTable() {
-            const query = (adminSearchInput ? adminSearchInput.value : '').toLowerCase().trim();
-            
-            const filteredData = submissionsData.filter(item => {
-                if (!query) return true;
-                const nama = (item.nama || '').toLowerCase();
-                const kampung = (item.kampung || '').toLowerCase();
-                return nama.includes(query) || kampung.includes(query);
-            });
+        backToFormBtn?.addEventListener('click', () => {
+            adminDashboard.classList.add('hidden');
+            document.body.style.overflow = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-            document.getElementById('totalDataTab').textContent = filteredData.length;
-            dataTableBody.innerHTML = '';
-            
-            if (filteredData.length === 0) {
-                emptyState.classList.remove('hidden');
-                tableElement.classList.add('hidden');
-            } else {
-                emptyState.classList.add('hidden');
-                tableElement.classList.remove('hidden');
-                
-                filteredData.forEach((item, index) => {
-                    let filesHTML = '<ul class="space-y-1.5">';
-                    if (item.files && Array.isArray(item.files)) {
-                        item.files.forEach(f => {
-                            const linkDrive = f.fileUrl 
-                                ? `<a href="${f.fileUrl}" target="_blank" class="text-[11px] text-brand-600 font-bold hover:underline inline-flex items-center mt-1"><i class="fa-brands fa-google-drive mr-1"></i> Buka File Drive</a>`
-                                : '';
+        floatingBackToFormBtn?.addEventListener('click', () => {
+            adminDashboard.classList.add('hidden');
+            document.body.style.overflow = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-                            filesHTML += `
-                                <li class="text-xs bg-slate-50 p-2 rounded-lg border border-slate-100 flex items-start shadow-2xs">
-                                    <i class="fa-regular fa-file-lines text-brand-500 mt-0.5 mr-2 shrink-0"></i>
-                                    <div class="min-w-0">
-                                        <span class="font-bold text-slate-700 block text-[11px]">${f.kategori}</span>
-                                        <span class="text-slate-500 truncate block text-[11px] max-w-[160px]" title="${f.fileName}">${f.fileName}</span>
-                                        ${linkDrive}
-                                    </div>
-                                </li>
-                            `;
-                        });
-                    }
-                    filesHTML += '</ul>';
+        function switchTab(tabName) {
+            tabRekapBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-center gap-1.5';
+            tabKampungBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-center gap-1.5';
+            tabKategoriBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-center gap-1.5';
 
-                    const tr = document.createElement('tr');
-                    tr.className = 'hover:bg-slate-50/80 transition-colors';
-                    tr.innerHTML = `
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-500 text-center font-bold align-top">${index + 1}</td>
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-500 whitespace-nowrap align-top text-xs"><i class="fa-regular fa-clock mr-1 opacity-50"></i> ${item.waktu || '-'}</td>
-                        <td class="px-4 sm:px-6 py-3.5 font-bold text-slate-900 align-top">${item.nama || '-'}</td>
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top"><span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">${item.kampung || '-'}</span></td>
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top min-w-[220px]">${filesHTML}</td>
-                        <td class="px-4 sm:px-6 py-3.5 text-slate-700 align-top text-center no-print">
-                            <button type="button" onclick="askDeleteRecord('${item.id}', '${(item.nama || '').replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 rounded-lg text-xs font-bold transition-all active:scale-95 inline-flex items-center gap-1 shadow-2xs" title="Hapus Data">
-                                <i class="fa-solid fa-trash-can"></i> Hapus
-                            </button>
-                        </td>
-                    `;
-                    dataTableBody.appendChild(tr);
-                });
+            sectionRekap.classList.add('hidden');
+            sectionKampung.classList.add('hidden');
+            sectionKategori.classList.add('hidden');
+
+            if (tabName === 'rekap') {
+                tabRekapBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold bg-brand-600 text-white transition-all flex items-center justify-center gap-1.5';
+                sectionRekap.classList.remove('hidden');
+            } else if (tabName === 'kampung') {
+                tabKampungBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold bg-brand-600 text-white transition-all flex items-center justify-center gap-1.5';
+                sectionKampung.classList.remove('hidden');
+            } else if (tabName === 'kategori') {
+                tabKategoriBtn.className = 'flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold bg-brand-600 text-white transition-all flex items-center justify-center gap-1.5';
+                sectionKategori.classList.remove('hidden');
             }
         }
 
-        // Form Tambah Kampung
-        document.getElementById('addKampungForm').addEventListener('submit', async (e) => {
+        tabRekapBtn?.addEventListener('click', () => switchTab('rekap'));
+        tabKampungBtn?.addEventListener('click', () => switchTab('kampung'));
+        tabKategoriBtn?.addEventListener('click', () => switchTab('kategori'));
+
+        function renderTable() {
+            const tableBody = document.getElementById('dataTableBody');
+            const emptyState = document.getElementById('emptyState');
+            const totalDataTab = document.getElementById('totalDataTab');
+            const query = (adminSearchInput ? adminSearchInput.value : '').toLowerCase().trim();
+
+            if (!tableBody) return;
+
+            tableBody.innerHTML = '';
+            let filtered = submissionsData.filter(item => {
+                const name = (item.namaLengkap || '').toLowerCase();
+                const kampung = (item.namaKampung || '').toLowerCase();
+                return name.includes(query) || kampung.includes(query);
+            });
+
+            if (totalDataTab) totalDataTab.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                if (emptyState) emptyState.classList.remove('hidden');
+                return;
+            } else {
+                if (emptyState) emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+
+                let filesHtml = '';
+                if (item.files && Array.isArray(item.files)) {
+                    filesHtml = item.files.map(f => `
+                        <a href="${f.fileUrl}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 hover:bg-sky-100 border border-sky-200 text-[11px] font-bold my-0.5 transition-colors">
+                            <i class="fa-solid fa-file-arrow-down text-sky-500"></i> ${f.kategori}: ${f.fileName}
+                        </a>
+                    `).join('<br>');
+                }
+
+                tr.innerHTML = `
+                    <td class="px-4 sm:px-6 py-4 text-center font-bold text-slate-500">${index + 1}</td>
+                    <td class="px-4 sm:px-6 py-4 text-slate-500 font-medium whitespace-nowrap">${item.waktuFormat || '-'}</td>
+                    <td class="px-4 sm:px-6 py-4 font-bold text-slate-900">${item.namaLengkap}</td>
+                    <td class="px-4 sm:px-6 py-4 font-bold text-brand-600"><span class="px-2.5 py-1 rounded-lg bg-brand-50 border border-brand-100">${item.namaKampung}</span></td>
+                    <td class="px-4 sm:px-6 py-4">${filesHtml}</td>
+                    <td class="px-4 sm:px-6 py-4 text-center no-print">
+                        <button type="button" class="btn-delete-sub-record px-2.5 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 border border-red-200 font-bold text-xs transition-colors" title="Hapus Record">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+
+                tr.querySelector('.btn-delete-sub-record')?.addEventListener('click', () => {
+                    askDeleteSubmission(item.id, item.namaLengkap);
+                });
+
+                tableBody.appendChild(tr);
+            });
+        }
+
+        adminSearchInput?.addEventListener('input', renderTable);
+
+        addKampungForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const input = document.getElementById('newKampungInput');
-            const namaBaru = input.value.trim();
-            if (!namaBaru || !currentUser) return;
+            const val = input ? input.value.trim() : '';
+
+            if (!val || !currentUser) return;
 
             try {
                 const kampungCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kampung');
-                await addDoc(kampungCol, { nama: namaBaru });
-                input.value = '';
-                showModal('success', 'Kampung Ditambahkan', `Nama kampung "${namaBaru}" berhasil ditambahkan.`);
+                await addDoc(kampungCol, { nama: val });
+                if (input) input.value = '';
+                showModal('success', 'Kampung Ditambahkan', `Kampung "${val}" berhasil ditambahkan ke dalam opsi.`);
             } catch (err) {
                 console.error("Gagal menambah kampung:", err);
-                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menyimpan nama kampung.');
+                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menambah nama kampung.');
             }
         });
 
-        // Form Tambah Kategori
-        document.getElementById('addKategoriForm').addEventListener('submit', async (e) => {
+        addKategoriForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const namaInput = document.getElementById('newKategoriNama');
+            const nameInput = document.getElementById('newKategoriNama');
             const driveInput = document.getElementById('newKategoriDrive');
-            
-            const namaBaru = namaInput.value.trim();
-            let driveVal = driveInput.value.trim();
-            if (!namaBaru || !driveVal || !currentUser) return;
 
-            // Ekstrak Drive Folder ID jika memasukkan Link Lengkap
+            const nama = nameInput ? nameInput.value.trim() : '';
+            let driveVal = driveInput ? driveInput.value.trim() : '';
+
+            if (!nama || !driveVal || !currentUser) return;
+
             let driveId = driveVal;
             if (driveVal.includes('/folders/')) {
                 const parts = driveVal.split('/folders/');
-                if (parts[1]) {
-                    driveId = parts[1].split('?')[0];
-                }
+                if (parts[1]) driveId = parts[1].split('?')[0];
             }
 
-            const customId = 'kat_' + Date.now();
-            const newCatData = {
-                id: customId,
-                nama: namaBaru,
+            try {
+                const katCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
+                await addDoc(katCol, {
+                    id: 'kat_' + Date.now(),
+                    nama: nama,
+                    driveId: driveId,
+                    driveLink: driveVal.startsWith('http') ? driveVal : `https://drive.google.com/drive/folders/${driveId}?usp=drive_link`
+                });
+
+                if (nameInput) nameInput.value = '';
+                if (driveInput) driveInput.value = '';
+                showModal('success', 'Kategori Ditambahkan', `Kategori "${nama}" berhasil ditambahkan dan terhubung ke Drive.`);
+            } catch (err) {
+                console.error("Gagal menambah kategori:", err);
+                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menambahkan kategori.');
+            }
+        });
+
+        function openAddSubFolderModal(docId) {
+            if (targetParentCatDocIdInput) targetParentCatDocIdInput.value = docId;
+            const subNameInput = document.getElementById('newSubFolderName');
+            const subDriveInput = document.getElementById('newSubFolderDrive');
+            if (subNameInput) subNameInput.value = '';
+            if (subDriveInput) subDriveInput.value = '';
+
+            addSubFolderModal.classList.remove('hidden');
+            setTimeout(() => {
+                addSubFolderBackdrop.classList.remove('opacity-0');
+                addSubFolderContent.classList.remove('opacity-0', 'scale-95');
+                addSubFolderContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        }
+
+        function hideSubFolderModal() {
+            addSubFolderBackdrop.classList.add('opacity-0');
+            addSubFolderContent.classList.remove('opacity-100', 'scale-100');
+            addSubFolderContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => addSubFolderModal.classList.add('hidden'), 250);
+        }
+
+        closeSubFolderModalBtn?.addEventListener('click', hideSubFolderModal);
+        cancelSubFolderBtn?.addEventListener('click', hideSubFolderModal);
+
+        addSubFolderForm?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const parentDocId = targetParentCatDocIdInput ? targetParentCatDocIdInput.value : '';
+            const subNameInput = document.getElementById('newSubFolderName');
+            const subDriveInput = document.getElementById('newSubFolderDrive');
+
+            const subName = subNameInput ? subNameInput.value.trim() : '';
+            let driveVal = subDriveInput ? subDriveInput.value.trim() : '';
+
+            if (!parentDocId || !subName || !driveVal || !currentUser) return;
+
+            let driveId = driveVal;
+            if (driveVal.includes('/folders/')) {
+                const parts = driveVal.split('/folders/');
+                if (parts[1]) driveId = parts[1].split('?')[0];
+            }
+
+            const targetCategory = daftarKategoriState.find(k => k.docId === parentDocId);
+            if (!targetCategory) return;
+
+            const existingSub = Array.isArray(targetCategory.subCategories) ? targetCategory.subCategories : [];
+            const newSubObj = {
+                id: 'sub_' + Date.now(),
+                nama: subName,
                 driveId: driveId,
                 driveLink: driveVal.startsWith('http') ? driveVal : `https://drive.google.com/drive/folders/${driveId}?usp=drive_link`
             };
 
-            try {
-                const kategoriCol = collection(db, 'artifacts', appId, 'public', 'data', 'master_kategori');
-                await addDoc(kategoriCol, newCatData);
+            const updatedSubCategories = [...existingSub, newSubObj];
 
-                namaInput.value = '';
-                driveInput.value = '';
-                showModal('success', 'Kategori Ditambahkan', `Kategori "${namaBaru}" berhasil dibuat dan terhubung ke Google Drive.`);
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'master_kategori', parentDocId);
+                await updateDoc(docRef, { subCategories: updatedSubCategories });
+
+                hideSubFolderModal();
+                showModal('success', 'Sub-Folder Ditambahkan', `Sub-folder "${subName}" berhasil ditambahkan.`);
             } catch (err) {
-                console.error("Gagal menambah kategori:", err);
-                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menyimpan kategori baru.');
+                console.error("Gagal menambah sub-folder:", err);
+                showModal('error', 'Gagal Menambah', 'Terjadi kesalahan saat menyimpan sub-folder.');
             }
         });
-
-        window.askDeleteRecord = function(id, nama) {
-            itemToDeleteId = id;
-            deleteType = 'submission';
-            deleteModalTitle.textContent = 'Hapus Data Berkas?';
-            deleteConfirmMessage.textContent = nama 
-                ? `Apakah Anda yakin ingin menghapus berkas milik "${nama}"?` 
-                : 'Apakah Anda yakin ingin menghapus data ini?';
-            openDeleteModal();
-        };
-
-        window.askDeleteKampung = function(id, nama) {
-            itemToDeleteId = id;
-            deleteType = 'kampung';
-            deleteModalTitle.textContent = 'Hapus Nama Kampung?';
-            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kampung "${nama}" dari daftar pilihan?`;
-            openDeleteModal();
-        };
-
-        window.askDeleteKategori = function(id, nama) {
-            itemToDeleteId = id;
-            deleteType = 'kategori';
-            deleteModalTitle.textContent = 'Hapus Kategori Berkas?';
-            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kategori "${nama}"? Kategori ini tidak akan lagi tampil di formulir.`;
-            openDeleteModal();
-        };
 
         function openDeleteModal() {
             deleteConfirmModal.classList.remove('hidden');
@@ -1381,15 +1402,44 @@
             deleteConfirmBackdrop.classList.add('opacity-0');
             deleteConfirmContent.classList.remove('opacity-100', 'scale-100');
             deleteConfirmContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                deleteConfirmModal.classList.add('hidden');
-                itemToDeleteId = null;
-            }, 250);
+            setTimeout(() => deleteConfirmModal.classList.add('hidden'), 250);
         }
 
-        cancelDeleteBtn.addEventListener('click', hideDeleteModal);
+        cancelDeleteBtn?.addEventListener('click', hideDeleteModal);
 
-        confirmDeleteBtn.addEventListener('click', async () => {
+        function askDeleteSubmission(id, name) {
+            itemToDeleteId = id;
+            deleteType = 'submission';
+            deleteModalTitle.textContent = 'Hapus Data Pengiriman?';
+            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus data pengiriman dari "${name}"?`;
+            openDeleteModal();
+        }
+
+        function askDeleteKampung(id, name) {
+            itemToDeleteId = id;
+            deleteType = 'kampung';
+            deleteModalTitle.textContent = 'Hapus Nama Kampung?';
+            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kampung "${name}"?`;
+            openDeleteModal();
+        }
+
+        function askDeleteKategori(docId, name) {
+            itemToDeleteId = docId;
+            deleteType = 'kategori';
+            deleteModalTitle.textContent = 'Hapus Kategori Utama?';
+            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus kategori "${name}"?`;
+            openDeleteModal();
+        }
+
+        function askDeleteSubCategory(parentDocId, subId, subName) {
+            itemToDeleteId = { parentDocId, subId };
+            deleteType = 'subcategory';
+            deleteModalTitle.textContent = 'Hapus Sub-Folder?';
+            deleteConfirmMessage.textContent = `Apakah Anda yakin ingin menghapus sub-folder "${subName}"?`;
+            openDeleteModal();
+        }
+
+        confirmDeleteBtn?.addEventListener('click', async () => {
             if (!itemToDeleteId || !currentUser) return;
 
             confirmDeleteBtn.disabled = true;
@@ -1406,10 +1456,18 @@
                 } else if (deleteType === 'kategori') {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'master_kategori', itemToDeleteId);
                     await deleteDoc(docRef);
+                } else if (deleteType === 'subcategory') {
+                    const { parentDocId, subId } = itemToDeleteId;
+                    const targetCategory = daftarKategoriState.find(k => k.docId === parentDocId);
+                    if (targetCategory && Array.isArray(targetCategory.subCategories)) {
+                        const newSubArr = targetCategory.subCategories.filter(s => s.id !== subId);
+                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'master_kategori', parentDocId);
+                        await updateDoc(docRef, { subCategories: newSubArr });
+                    }
                 }
 
                 hideDeleteModal();
-                setTimeout(() => showModal('success', 'Berhasil Dihapus', 'Data telah berhasil dihapus dari Cloud Database.'), 300);
+                setTimeout(() => showModal('success', 'Berhasil Dihapus', 'Data telah berhasil diperbarui.'), 300);
             } catch (err) {
                 console.error("Gagal menghapus:", err);
                 hideDeleteModal();
@@ -1421,49 +1479,57 @@
             }
         });
 
-        function openAdminDashboard() {
-            renderTable();
-            switchTab('rekap');
-            document.body.style.overflow = 'hidden'; 
-            adminDashboard.classList.remove('hidden');
+        function showModal(type, title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+
+            if (type === 'success') {
+                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full mb-3.5 bg-emerald-100 text-emerald-600';
+                modalIconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-2xl sm:text-3xl"></i>';
+                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-emerald-700 transition-colors active:scale-95';
+            } else {
+                modalIconContainer.className = 'mx-auto flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full mb-3.5 bg-red-100 text-red-600';
+                modalIconContainer.innerHTML = '<i class="fa-solid fa-circle-exclamation text-2xl sm:text-3xl"></i>';
+                closeModalBtn.className = 'w-full inline-flex justify-center rounded-xl bg-red-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-red-700 transition-colors active:scale-95';
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalBackdrop.classList.remove('opacity-0');
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
         }
 
-        backToFormBtn.addEventListener('click', () => {
-            adminDashboard.classList.add('hidden');
-            document.body.style.overflow = '';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeModalBtn?.addEventListener('click', () => {
+            modalBackdrop.classList.add('opacity-0');
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 250);
         });
 
-        if (floatingBackToFormBtn) {
-            floatingBackToFormBtn.addEventListener('click', () => {
-                adminDashboard.classList.add('hidden');
-                document.body.style.overflow = '';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-
-        printDataBtn.addEventListener('click', () => {
-            const dateStr = new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' });
-            document.getElementById('printDate').textContent = 'Dicetak pada: ' + dateStr;
+        printDataBtn?.addEventListener('click', () => {
+            const printDateEl = document.getElementById('printDate');
+            if (printDateEl) {
+                printDateEl.textContent = 'Dicetak pada: ' + new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' });
+            }
             window.print();
         });
 
-        previewDataBtn.addEventListener('click', () => {
+        previewDataBtn?.addEventListener('click', () => {
             document.body.classList.add('preview-active');
-            exitPreviewContainer.classList.remove('hidden');
-            exitPreviewContainer.classList.add('flex');
-            
-            setTimeout(() => {
-                showModal('success', 'Mode Pratinjau', 'Tampilan telah disederhanakan untuk mode presentasi.');
-            }, 100);
+            exitPreviewContainer?.classList.remove('hidden');
+            exitPreviewContainer?.classList.add('flex');
+            showModal('success', 'Mode Pratinjau', 'Tampilan telah disederhanakan untuk mode presentasi.');
         });
 
-        exitPreviewBtn.addEventListener('click', () => {
+        exitPreviewBtn?.addEventListener('click', () => {
             document.body.classList.remove('preview-active');
-            exitPreviewContainer.classList.add('hidden');
-            exitPreviewContainer.classList.remove('flex');
+            exitPreviewContainer?.classList.add('hidden');
+            exitPreviewContainer?.classList.remove('flex');
         });
 
+        // Initialize App
         initAuthAndDataSync();
     </script>
 </body>
